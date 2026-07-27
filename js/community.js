@@ -1,4 +1,4 @@
-// ============ COMMUNITY & BLOG FUNCTIONS ============
+﻿// ============ COMMUNITY & BLOG FUNCTIONS ============
 
 function addPost() {
     if (!state.currentUser) {
@@ -53,16 +53,16 @@ function loadPosts() {
                     <div class="post-author">
                         <div class="post-author-avatar">${post.avatar}</div>
                         <div class="post-author-info">
-                            <h5>${post.author}</h5>
+                            <h5>${escapeHTML(post.author)}</h5>
                             <p>${getTimeAgo(post.createdAt)}</p>
                         </div>
                     </div>
                 </div>
-                <p>${post.content}</p>
+                <p>${escapeHTML(post.content)}</p>
                 <div class="post-actions">
-                    <button onclick="likePost(${post.id})">👍 Like (${post.likes})</button>
-                    <button onclick="commentPost(${post.id})">💬 Comment</button>
-                    <button onclick="sharePost(${post.id})">📤 Share</button>
+                    <button onclick="likePost(${post.id})">Like (${post.likes})</button>
+                    <button onclick="commentPost(${post.id})">Comment</button>
+                    <button onclick="sharePost(${post.id})">Share</button>
                 </div>
             </div>
         `;
@@ -97,7 +97,7 @@ function commentPost(postId) {
 }
 
 function sharePost(postId) {
-    showAlert('Post link copied to clipboard!', 'info');
+    copyShareLink(`post-${postId}`);
 }
 
 function addQuestion() {
@@ -153,15 +153,15 @@ function loadQuestions() {
                     <div class="post-author">
                         <div class="post-author-avatar">${question.avatar}</div>
                         <div class="post-author-info">
-                            <h5>${question.author}</h5>
-                            <p>🏙️ ${question.city} | ${getTimeAgo(question.createdAt)}</p>
+                            <h5>${escapeHTML(question.author)}</h5>
+                            <p>${escapeHTML(question.city)} | ${getTimeAgo(question.createdAt)}</p>
                         </div>
                     </div>
                 </div>
-                <p><strong>Question:</strong> ${question.content}</p>
+                <p><strong>Question:</strong> ${escapeHTML(question.content)}</p>
                 <div class="post-actions">
-                    <button onclick="answerQuestion(${question.id})">✏️ Answer</button>
-                    <button onclick="markHelpful(${question.id})">👍 Helpful (${question.answers.length})</button>
+                    <button onclick="answerQuestion(${question.id})">Answer</button>
+                    <button onclick="markHelpful(${question.id})">Helpful (${question.answers.length})</button>
                 </div>
             </div>
         `;
@@ -248,17 +248,17 @@ function loadBlogPosts() {
                     <div class="post-author">
                         <div class="post-author-avatar">${post.avatar}</div>
                         <div class="post-author-info">
-                            <h5>${post.author}</h5>
-                            <p>🏙️ ${post.city} | ${getTimeAgo(post.createdAt)}</p>
+                            <h5>${escapeHTML(post.author)}</h5>
+                            <p>${escapeHTML(post.city)} | ${getTimeAgo(post.createdAt)}</p>
                         </div>
                     </div>
                 </div>
-                <h4 style="color: var(--primary-color); margin-bottom: 10px;">${post.title}</h4>
-                <p>${post.content.substring(0, 200)}...</p>
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">${escapeHTML(post.title)}</h4>
+                <p>${escapeHTML(post.content.substring(0, 200))}${post.content.length > 200 ? '...' : ''}</p>
                 <div class="post-actions">
-                    <button onclick="readBlogPost(${post.id})">📖 Read More</button>
-                    <button onclick="likeBlogPost(${post.id})">👍 Like (${post.likes})</button>
-                    <button onclick="shareBlogPost(${post.id})">📤 Share</button>
+                    <button onclick="readBlogPost(${post.id})">Read More</button>
+                    <button onclick="likeBlogPost(${post.id})">Like (${post.likes})</button>
+                    <button onclick="shareBlogPost(${post.id})">Share</button>
                 </div>
             </div>
         `;
@@ -285,5 +285,18 @@ function likeBlogPost(postId) {
 }
 
 function shareBlogPost(postId) {
-    showAlert('Blog post link copied to clipboard!', 'info');
+    copyShareLink(`blog-${postId}`);
+}
+
+function copyShareLink(anchor) {
+    const url = `${window.location.href.split('#')[0]}#${anchor}`;
+
+    if (!navigator.clipboard) {
+        showAlert(url, 'info');
+        return;
+    }
+
+    navigator.clipboard.writeText(url)
+        .then(() => showAlert('Link copied to clipboard!', 'info'))
+        .catch(() => showAlert(url, 'info'));
 }

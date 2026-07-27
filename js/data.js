@@ -1,4 +1,4 @@
-// ============ APP STATE MANAGEMENT ============
+﻿// ============ APP STATE MANAGEMENT ============
 class AppState {
     constructor() {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
@@ -27,12 +27,12 @@ const state = new AppState();
 // ============ CITY DATA ============
 const cityData = {
     'Marrakech': {
-        emoji: '🔴',
+        emoji: 'MRK',
         description: 'The Red City',
         hotels: [
-            { name: 'Riad Dar Anika', price: '\$80-150', rating: '★★★★★', desc: 'Luxury riad in the medina' },
-            { name: 'Atlas Almohad Hotel', price: '\$50-100', rating: '★★★★', desc: 'Modern comfort with pool' },
-            { name: 'Kasbah Tamadot', price: '\$200+', rating: '★★★★★', desc: 'Luxury resort with Atlas views' }
+            { name: 'Riad Dar Anika', price: '\$80-150', rating: '5 stars', desc: 'Luxury riad in the medina' },
+            { name: 'Atlas Almohad Hotel', price: '\$50-100', rating: '4 stars', desc: 'Modern comfort with pool' },
+            { name: 'Kasbah Tamadot', price: '\$200+', rating: '5 stars', desc: 'Luxury resort with Atlas views' }
         ],
         restaurants: [
             { name: 'Le Jardin', cuisine: 'Moroccan', price: '\$15-25', desc: 'Traditional tagine and couscous' },
@@ -49,12 +49,12 @@ const cityData = {
         bestTime: 'Morning'
     },
     'Tangier': {
-        emoji: '🌊',
+        emoji: 'TNG',
         description: 'Gateway to Africa',
         hotels: [
-            { name: 'Hilton Tangier', price: '\$100-150', rating: '★★★★★', desc: 'Beachfront luxury' },
-            { name: 'La Tangerine', price: '\$60-120', rating: '★★★★', desc: 'Charming boutique hotel' },
-            { name: 'Mamora Beach Resort', price: '\$80-140', rating: '★★★★', desc: 'Beach access with modern amenities' }
+            { name: 'Hilton Tangier', price: '\$100-150', rating: '5 stars', desc: 'Beachfront luxury' },
+            { name: 'La Tangerine', price: '\$60-120', rating: '4 stars', desc: 'Charming boutique hotel' },
+            { name: 'Mamora Beach Resort', price: '\$80-140', rating: '4 stars', desc: 'Beach access with modern amenities' }
         ],
         restaurants: [
             { name: 'Le Salon Bleu', cuisine: 'Mediterranean', price: '\$25-40', desc: 'Sea view dining' },
@@ -71,12 +71,12 @@ const cityData = {
         bestTime: 'Afternoon'
     },
     'Fes': {
-        emoji: '🕌',
+        emoji: 'FES',
         description: 'The Spiritual Heart',
         hotels: [
-            { name: 'Palais Jamai', price: '\$120-180', rating: '★★★★★', desc: 'Stunning palace hotel' },
-            { name: 'Riad Fes', price: '\$90-150', rating: '★★★★', desc: 'Traditional riad luxury' },
-            { name: 'Sofitel Fes Palais Jamai', price: '\$100-160', rating: '★★★★★', desc: 'Premium palace hotel' }
+            { name: 'Palais Jamai', price: '\$120-180', rating: '5 stars', desc: 'Stunning palace hotel' },
+            { name: 'Riad Fes', price: '\$90-150', rating: '4 stars', desc: 'Traditional riad luxury' },
+            { name: 'Sofitel Fes Palais Jamai', price: '\$100-160', rating: '5 stars', desc: 'Premium palace hotel' }
         ],
         restaurants: [
             { name: 'Restaurant Dar Baraka', cuisine: 'Moroccan', price: '\$20-30', desc: 'Rooftop dining' },
@@ -93,12 +93,12 @@ const cityData = {
         bestTime: 'Early morning'
     },
     'Agadir': {
-        emoji: '🏖️',
+        emoji: 'AGA',
         description: 'Beach Paradise',
         hotels: [
-            { name: 'Sofitel Agadir Royal Bay', price: '\$120-180', rating: '★★★★★', desc: 'Luxury beach resort' },
-            { name: 'Atlantic Palace', price: '\$80-130', rating: '★★★★', desc: 'Modern beachfront hotel' },
-            { name: 'Ibis Agadir', price: '\$50-100', rating: '★★★', desc: 'Budget beach option' }
+            { name: 'Sofitel Agadir Royal Bay', price: '\$120-180', rating: '5 stars', desc: 'Luxury beach resort' },
+            { name: 'Atlantic Palace', price: '\$80-130', rating: '4 stars', desc: 'Modern beachfront hotel' },
+            { name: 'Ibis Agadir', price: '\$50-100', rating: '3 stars', desc: 'Budget beach option' }
         ],
         restaurants: [
             { name: 'Restaurant Francais', cuisine: 'French', price: '\$20-40', desc: 'Upscale dining' },
@@ -115,12 +115,12 @@ const cityData = {
         bestTime: 'Morning and afternoon'
     },
     'Rabat': {
-        emoji: '👑',
+        emoji: 'RBA',
         description: 'The Capital',
         hotels: [
-            { name: 'Sofitel Rabat Jardin', price: '\$130-180', rating: '★★★★★', desc: 'Luxury garden hotel' },
-            { name: 'Riad Dar Anika', price: '\$80-140', rating: '★★★★', desc: 'Traditional riad' },
-            { name: 'Hotel Transatlantique', price: '\$60-110', rating: '★★★★', desc: 'Riverside location' }
+            { name: 'Sofitel Rabat Jardin', price: '\$130-180', rating: '5 stars', desc: 'Luxury garden hotel' },
+            { name: 'Riad Dar Anika', price: '\$80-140', rating: '4 stars', desc: 'Traditional riad' },
+            { name: 'Hotel Transatlantique', price: '\$60-110', rating: '4 stars', desc: 'Riverside location' }
         ],
         restaurants: [
             { name: 'Le Grand Comptoir', cuisine: 'French', price: '\$25-45', desc: 'Fine dining' },
@@ -137,12 +137,12 @@ const cityData = {
         bestTime: 'Morning'
     },
     'Casablanca': {
-        emoji: '🏢',
+        emoji: 'CAS',
         description: 'The White City',
         hotels: [
-            { name: 'Royal Mansour', price: '\$200+', rating: '★★★★★', desc: 'Ultra-luxury palace hotel' },
-            { name: 'Sofitel Casablanca', price: '\$120-180', rating: '★★★★★', desc: 'Oceanfront luxury' },
-            { name: 'Ibis Casablanca', price: '\$60-100', rating: '★★★', desc: 'Budget-friendly option' }
+            { name: 'Royal Mansour', price: '\$200+', rating: '5 stars', desc: 'Ultra-luxury palace hotel' },
+            { name: 'Sofitel Casablanca', price: '\$120-180', rating: '5 stars', desc: 'Oceanfront luxury' },
+            { name: 'Ibis Casablanca', price: '\$60-100', rating: '3 stars', desc: 'Budget-friendly option' }
         ],
         restaurants: [
             { name: 'Casablanca Nights', cuisine: 'Moroccan', price: '\$20-35', desc: 'Upscale Moroccan' },

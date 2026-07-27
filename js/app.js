@@ -1,4 +1,4 @@
-// ============ MAIN APPLICATION INITIALIZATION ============
+﻿// ============ MAIN APPLICATION INITIALIZATION ============
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -41,7 +41,7 @@ function setupEventListeners() {
         const sidebar = document.getElementById('sidebar');
         const menuToggle = document.querySelector('.menu-toggle');
         
-        if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+        if (!sidebar.contains(e.target) && (!menuToggle || !menuToggle.contains(e.target))) {
             closeSidebar();
         }
     });
@@ -114,7 +114,7 @@ function initializeDemoData() {
                 userId: 1,
                 author: 'Ahmed Hassan',
                 avatar: 'A',
-                content: 'Just finished exploring the Koutoubia Mosque. Amazing architecture! 🕌',
+                content: 'Just finished exploring the Koutoubia Mosque. Amazing architecture!',
                 type: 'post',
                 likes: 5,
                 comments: [],
@@ -125,7 +125,7 @@ function initializeDemoData() {
                 userId: 2,
                 author: 'Sarah Johnson',
                 avatar: 'S',
-                content: 'The food in Casablanca is incredible. Already planning my next trip! 🍽️',
+                content: 'The food in Casablanca is incredible. Already planning my next trip!',
                 type: 'post',
                 likes: 8,
                 comments: [],
@@ -171,10 +171,3 @@ function exportUserData() {
     showAlert('Data exported successfully!', 'success');
 }
 
-// ============ SERVICE WORKER REGISTRATION (for PWA features) ============
-
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(error => {
-        console.log('Service Worker registration failed:', error);
-    });
-}

@@ -1,4 +1,4 @@
-// ============ PROFILE FUNCTIONS ============
+﻿// ============ PROFILE FUNCTIONS ============
 
 function loadProfile() {
     if (!state.currentUser) {
@@ -91,14 +91,19 @@ function loadChallenges() {
 
     challengesList.innerHTML = userChallenges.map(challenge => {
         const statusClass = challenge.status === 'completed' ? 'completed' : 'pending';
-        const statusText = challenge.status === 'completed' ? '✓ Completed' : '⏳ Pending';
+        const statusText = challenge.status === 'completed' ? 'Completed' : 'Pending';
         const city = challenge.city;
+        const actionButton = challenge.status === 'completed'
+            ? ''
+            : `<button class="btn btn-secondary" style="width: 100%;" onclick="completeChallenge(${challenge.id})">
+                Mark as Completed
+            </button>`;
 
         return `
             <div class="challenge-card">
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                     <div>
-                        <h4>🏙️ ${city} Day Plan</h4>
+                        <h4>${escapeHTML(city)} Day Plan</h4>
                         <p style="color: var(--text-light); margin-bottom: 10px;">
                             Created ${formatDate(challenge.createdAt)}
                         </p>
@@ -106,9 +111,7 @@ function loadChallenges() {
                     <span class="challenge-status ${statusClass}">${statusText}</span>
                 </div>
                 <div style="margin-top: 15px;">
-                    <button class="btn btn-secondary" style="width: 100%;" onclick="completeChallenge(${challenge.id})">
-                        Mark as Completed
-                    </button>
+                    ${actionButton}
                 </div>
             </div>
         `;
@@ -121,7 +124,7 @@ function completeChallenge(challengeId) {
         challenge.status = 'completed';
         challenge.completedAt = new Date().toISOString();
         state.save();
-        showAlert('Challenge completed! 🎉', 'success');
+        showAlert('Challenge completed!', 'success');
         loadChallenges();
         loadProfile();
     }

@@ -2,6 +2,7 @@
 
 function showAlert(message, type = 'info') {
     const alertElement = document.getElementById(`alert${type.charAt(0).toUpperCase() + type.slice(1)}`);
+    if (!alertElement) return;
     alertElement.textContent = message;
     alertElement.classList.add('show');
     setTimeout(() => alertElement.classList.remove('show'), 3000);
@@ -20,10 +21,16 @@ function showSection(sectionId) {
     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
     
     // Show selected section
-    document.getElementById(sectionId).classList.add('active');
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.classList.add('active');
+
+    document.querySelectorAll('.sidebar-menu .active').forEach(item => item.classList.remove('active'));
+    document.querySelectorAll(`.sidebar-menu [onclick*="${sectionId}"]`).forEach(item => item.classList.add('active'));
 
     // Close sidebar on mobile
     closeSidebar();
+    closeSubmenus();
 
     // Load section-specific content
     switch(sectionId) {
@@ -54,6 +61,10 @@ function closeSidebar() {
     document.getElementById('sidebar').classList.remove('active');
 }
 
+function closeSubmenus() {
+    document.querySelectorAll('.submenu.active').forEach(submenu => submenu.classList.remove('active'));
+}
+
 function toggleSubmenu(menuId) {
     const submenu = document.getElementById(menuId);
     submenu.classList.toggle('active');
@@ -62,6 +73,16 @@ function toggleSubmenu(menuId) {
 function showTab(tabName) {
     document.getElementById('communityPosts').style.display = tabName === 'communityPosts' ? 'block' : 'none';
     document.getElementById('askLocals').style.display = tabName === 'askLocals' ? 'block' : 'none';
+}
+
+function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[char]);
 }
 
 function initializeDashboard() {
@@ -87,8 +108,3 @@ function getTimeAgo(dateString) {
     return Math.floor(seconds / 86400) + 'd ago';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    if (state.currentUser) {
-        loadMainApp();
-    }
-});
