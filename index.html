@@ -1,29 +1,28 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morocco World Cup Travel Guide</title>
+    <title>MorEcho - AI Tourism Morocco</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Loader -->
     <div class="loader-container" id="loader">
         <div class="spinner"></div>
     </div>
 
-    <!-- Alerts -->
     <div class="alert alert-success" id="alertSuccess"></div>
     <div class="alert alert-error" id="alertError"></div>
     <div class="alert alert-info" id="alertInfo"></div>
 
-    <!-- ============ AUTHENTICATION SECTION ============ -->
     <div class="auth-container" id="authContainer">
         <div class="auth-box">
-            <div class="logo">MorEcho</div>
+            <div class="brand-lockup auth-brand">
+                <img src="assets/logo.png" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <strong style="display:none;">MorEcho</strong>
+            </div>
             <h1 id="authTitle">Login</h1>
 
-            <!-- Login Form -->
             <div id="loginForm">
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
@@ -39,7 +38,6 @@
                 </div>
             </div>
 
-            <!-- Registration Form -->
             <div id="registerForm" style="display: none;">
                 <div class="form-group">
                     <label for="registerName">Full Name</label>
@@ -65,156 +63,136 @@
         </div>
     </div>
 
-    <!-- ============ MAIN APPLICATION ============ -->
     <div class="main-container" id="mainContainer">
-        <!-- Header -->
-        <div class="header">
+        <header class="header">
             <div class="header-left">
-                <h1>Morocco World Cup Guide</h1>
+                <div class="brand-lockup header-brand">
+                    <img src="assets/logo.png" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <strong style="display:none;">MorEcho</strong>
+                </div>
+                <h1>AI Tourism Morocco</h1>
             </div>
             <div class="header-right">
-                <div class="user-info">
-                    <div class="user-avatar" id="userAvatarHeader">U</div>
-                </div>
+                <button class="mode-btn" onclick="toggleAccessibility('high-contrast')">Contrast</button>
+                <div class="user-avatar" id="userAvatarHeader">U</div>
                 <button class="logout-btn" onclick="handleLogout()">Logout</button>
             </div>
-        </div>
+        </header>
 
-        <!-- Sidebar Navigation -->
-        <div class="sidebar" id="sidebar">
+        <nav class="sidebar" id="sidebar" aria-label="MorEcho navigation">
             <ul class="sidebar-menu">
+                <li><a class="menu-item active" onclick="showSection('dashboard')"><span data-icon="home"></span>Home</a></li>
+                <li><a class="menu-item" onclick="showSection('aiCompanion')"><span data-icon="bot"></span>AI</a></li>
+                <li><a class="menu-item" onclick="showSection('map')"><span data-icon="map"></span>Map</a></li>
+                <li><a class="menu-item" onclick="showSection('askPlan')"><span data-icon="plan"></span>Planner</a></li>
                 <li>
-                    <a class="menu-item active" onclick="showSection('dashboard')">
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <div class="menu-item" onclick="toggleSubmenu('challengesMenu')">
-                        Challenges
+                    <div class="menu-item" onclick="toggleSubmenu('moreMenu')"><span data-icon="passport"></span>More</div>
+                    <div class="submenu" id="moreMenu">
+                        <a onclick="showSection('worldCup')">World Cup</a>
+                        <a onclick="showSection('passport')">Passport</a>
+                        <a onclick="showSection('marketplace')">Marketplace</a>
+                        <a onclick="showSection('transport')">Transport</a>
+                        <a onclick="showSection('emergency')">Emergency</a>
+                        <a onclick="showSection('recognition')">AI Vision</a>
+                        <a onclick="showSection('accessibility')">Accessibility</a>
+                        <a onclick="showSection('community')">Community</a>
+                        <a onclick="showSection('blog')">Journal</a>
+                        <a onclick="showSection('myChallenges')">Challenges</a>
+                        <a onclick="showSection('analytics')">Analytics</a>
+                        <a onclick="showSection('profile')">Profile</a>
                     </div>
-                    <div class="submenu" id="challengesMenu">
-                        <a onclick="showSection('askPlan')">Ask for a Plan</a>
-                        <a onclick="showSection('myChallenges')">Your Challenges</a>
-                    </div>
-                </li>
-                <li>
-                    <a class="menu-item" onclick="showSection('community')">
-                        Community
-                    </a>
-                </li>
-                <li>
-                    <a class="menu-item" onclick="showSection('blog')">
-                        Blog
-                    </a>
-                </li>
-                <li>
-                    <a class="menu-item" onclick="showSection('profile')">
-                        Profile
-                    </a>
                 </li>
             </ul>
-        </div>
+        </nav>
 
-        <!-- Main Content Area -->
-        <div class="main-content">
-            <!-- Dashboard Section -->
+        <main class="main-content">
             <section class="content-section active" id="dashboard">
-                <h2>Welcome to Morocco World Cup Travel Guide</h2>
-                <p style="color: var(--text-light); margin-bottom: 20px;">
-                    Discover the best travel experiences during the Morocco World Cup. Explore amazing cities, get day plans, 
-                    connect with travelers, and share your adventures!
-                </p>
-
-                <div class="dashboard-grid">
-                    <div class="card" onclick="showSection('askPlan')">
-                        <div class="card-icon">MAP</div>
-                        <h3>Ask for a Plan</h3>
-                        <p>Get personalized day plans for any Moroccan city</p>
+                <div class="hero-panel">
+                    <div>
+                        <span class="eyebrow">FIFA World Cup 2030 ready</span>
+                        <h2>MorEcho turns Morocco into a personal AI travel story.</h2>
+                        <p>Plan smarter trips, discover culture, book local experiences, travel safely, and collect memories in your digital passport.</p>
                     </div>
-                    <div class="card" onclick="showSection('community')">
-                        <div class="card-icon">CHAT</div>
-                        <h3>Community</h3>
-                        <p>Connect with other travelers and locals</p>
-                    </div>
-                    <div class="card" onclick="showSection('blog')">
-                        <div class="card-icon">BLOG</div>
-                        <h3>Blog</h3>
-                        <p>Read travel stories and tips from our community</p>
-                    </div>
-                    <div class="card" onclick="showSection('myChallenges')">
-                        <div class="card-icon">GOAL</div>
-                        <h3>My Challenges</h3>
-                        <p>Track your travel challenges and achievements</p>
-                    </div>
-                    <div class="card" onclick="showSection('profile')">
-                        <div class="card-icon">USER</div>
-                        <h3>Edit Profile</h3>
-                        <p>Update your profile information</p>
-                    </div>
-                    <div class="card" onclick="showSection('community')">
-                        <div class="card-icon">ASK</div>
-                        <h3>Ask Locals</h3>
-                        <p>Get advice from local Moroccan experts</p>
-                    </div>
+                    <button class="btn btn-primary" onclick="showSection('aiCompanion')">Ask MorEcho AI</button>
                 </div>
 
-                <!-- Featured Cities -->
-                <div style="margin-top: 40px;">
-                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">Featured Cities</h3>
-                    <div class="dashboard-grid">
-                        <div class="card">
-                            <h3>Marrakech</h3>
-                            <p>The Red City - Known for Medina, Atlas Mountains</p>
+                <div class="metric-grid" id="smartOverview"></div>
+
+                <div class="dashboard-grid">
+                    <div class="card" onclick="showSection('aiCompanion')"><span data-icon="bot"></span><h3>AI Travel Companion</h3><p>Multilingual guidance for itineraries, culture, safety and local tips.</p></div>
+                    <div class="card" onclick="showSection('map')"><span data-icon="map"></span><h3>Interactive Map</h3><p>Explore monuments, beaches, hospitals, transport and fan zones.</p></div>
+                    <div class="card" onclick="showSection('worldCup')"><span data-icon="trophy"></span><h3>World Cup Mode</h3><p>Match cities, fan zones, stadium tips and match-day mobility.</p></div>
+                    <div class="card" onclick="showSection('passport')"><span data-icon="passport"></span><h3>Digital Passport</h3><p>Unlock stamps, XP, badges and sustainability progress.</p></div>
+                    <div class="card" onclick="showSection('marketplace')"><span data-icon="market"></span><h3>Local Marketplace</h3><p>Book cooking classes, workshops, tours and surf lessons.</p></div>
+                    <div class="card" onclick="showSection('emergency')"><span data-icon="shield"></span><h3>Emergency Help</h3><p>Quick police, ambulance, tourist support and lost document guidance.</p></div>
+                </div>
+
+                <h3 class="section-title">Personalized recommendations</h3>
+                <div class="recommendation-grid" id="recommendationPanel"></div>
+            </section>
+
+            <section class="content-section" id="aiCompanion">
+                <h2>AI Travel Companion</h2>
+                <p class="muted">Prototype assistant for English, French, Arabic, Spanish and Portuguese responses.</p>
+                <div class="app-grid two-col">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="aiLanguage">Language</label>
+                            <select id="aiLanguage">
+                                <option value="en">English</option>
+                                <option value="fr">Francais</option>
+                                <option value="ar">Arabic</option>
+                                <option value="es">Espanol</option>
+                                <option value="pt">Portugues</option>
+                            </select>
                         </div>
-                        <div class="card">
-                            <h3>Tangier</h3>
-                            <p>Gateway to Africa - Beautiful beaches and Casbah</p>
+                        <div class="form-group">
+                            <label for="aiQuestion">Ask anything</label>
+                            <textarea id="aiQuestion" placeholder="Example: I have one day in Marrakech and love history"></textarea>
                         </div>
-                        <div class="card">
-                            <h3>Fes</h3>
-                            <p>The Spiritual Heart - Ancient Medina and University</p>
-                        </div>
-                        <div class="card">
-                            <h3>Agadir</h3>
-                            <p>Beach Paradise - Modern resort city by the sea</p>
-                        </div>
-                        <div class="card">
-                            <h3>Rabat</h3>
-                            <p>The Capital - Riverside charm and imperial palace</p>
-                        </div>
-                        <div class="card">
-                            <h3>Casablanca</h3>
-                            <p>The White City - Modern hub and Hassan II Mosque</p>
-                        </div>
+                        <button class="btn btn-primary" onclick="askAICompanion()">Generate answer</button>
+                    </div>
+                    <div class="chat-panel" id="aiConversation">
+                        <div class="chat-bubble ai">Hello, I am MorEcho AI. Ask about cities, budgets, restaurants, traditions, safety or World Cup travel.</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Ask for a Plan Section -->
-            <section class="content-section" id="askPlan">
-                <h2>Get Your Perfect Day Plan</h2>
-                <p style="color: var(--text-light); margin-bottom: 20px;">
-                    Select a city and we'll create a personalized day plan with hotels, restaurants, transportation, and monuments!
-                </p>
+            <section class="content-section" id="map">
+                <h2>Interactive Morocco Map</h2>
+                <p class="muted">Explore points of interest with price, opening hours, duration and accessibility notes.</p>
+                <div class="filter-row">
+                    <button onclick="filterMap('all')">All</button>
+                    <button onclick="filterMap('UNESCO')">UNESCO</button>
+                    <button onclick="filterMap('Monument')">Monuments</button>
+                    <button onclick="filterMap('Beach')">Beaches</button>
+                    <button onclick="filterMap('Nature')">Nature</button>
+                </div>
+                <div class="map-layout">
+                    <div class="morocco-map" id="moroccoMap"></div>
+                    <div id="mapLocationList"></div>
+                </div>
+            </section>
 
+            <section class="content-section" id="askPlan">
+                <h2>Smart Itinerary Planner</h2>
+                <p class="muted">Generate a day plan with hotels, restaurants, transport and monuments.</p>
                 <div class="form-container">
                     <div class="form-group">
                         <label>Select City</label>
                         <div class="city-grid" id="cityGrid"></div>
                     </div>
-
                     <div class="form-group">
                         <label for="planBudget">Budget (USD)</label>
                         <select id="planBudget">
                             <option value="">Select budget range</option>
-                            <option value="budget">Budget (\$50-100)</option>
-                            <option value="standard">Standard (\$100-250)</option>
-                            <option value="luxury">Luxury (\$250+)</option>
+                            <option value="budget">Budget ($50-100)</option>
+                            <option value="standard">Standard ($100-250)</option>
+                            <option value="luxury">Luxury ($250+)</option>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="interests">Interests (Select multiple)</label>
+                        <label for="interests">Interests</label>
                         <select id="interests" multiple>
                             <option value="history">History & Culture</option>
                             <option value="beach">Beaches</option>
@@ -224,58 +202,120 @@
                             <option value="nightlife">Nightlife</option>
                         </select>
                     </div>
-
                     <button class="btn btn-primary" onclick="generatePlan()">Generate My Plan</button>
                 </div>
-
                 <div id="planResult"></div>
             </section>
 
-            <!-- My Challenges Section -->
+            <section class="content-section" id="worldCup">
+                <h2>FIFA World Cup 2030 Mode</h2>
+                <p class="muted">Dedicated match-city guidance for stadiums, fan zones, transport and safety.</p>
+                <div class="feature-grid" id="worldCupCards"></div>
+            </section>
+
+            <section class="content-section" id="passport">
+                <h2>Moroccan Digital Passport</h2>
+                <p class="muted">Unlock city stamps, XP, achievements and sustainable traveler progress.</p>
+                <div id="passportPanel"></div>
+            </section>
+
+            <section class="content-section" id="marketplace">
+                <h2>Local Experiences Marketplace</h2>
+                <p class="muted">Book activities that support Moroccan guides, artisans and small businesses.</p>
+                <div class="feature-grid" id="marketplaceGrid"></div>
+            </section>
+
+            <section class="content-section" id="transport">
+                <h2>Transportation Assistant</h2>
+                <p class="muted">Compare route options by time, cost and sustainability.</p>
+                <div class="app-grid two-col">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="transportCity">City</label>
+                            <select id="transportCity">
+                                <option>Marrakech</option><option>Casablanca</option><option>Rabat</option><option>Fes</option><option>Tangier</option><option>Agadir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transportMode">Transport mode</label>
+                            <select id="transportMode">
+                                <option value="walking">Walking</option>
+                                <option value="tram">Tram</option>
+                                <option value="bus">Bus</option>
+                                <option value="train">Train</option>
+                                <option value="taxi">Taxi</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="calculateTransport()">Calculate route</button>
+                    </div>
+                    <div id="transportResult"></div>
+                </div>
+            </section>
+
+            <section class="content-section" id="emergency">
+                <h2>Emergency Assistance</h2>
+                <p class="muted">Quick access to essential contacts and travel safety guidance.</p>
+                <div class="emergency-grid" id="emergencyList"></div>
+            </section>
+
+            <section class="content-section" id="recognition">
+                <h2>AI Image Recognition</h2>
+                <p class="muted">Prototype: describe or name what appears in a photo and MorEcho explains it.</p>
+                <div class="app-grid two-col">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="imageHint">Image hint</label>
+                            <input id="imageHint" type="text" placeholder="mosque, tagine, zellige, monument">
+                        </div>
+                        <button class="btn btn-primary" onclick="analyzeImageHint()">Analyze</button>
+                    </div>
+                    <div id="recognitionResult"></div>
+                </div>
+            </section>
+
+            <section class="content-section" id="accessibility">
+                <h2>Accessibility & Ethical AI</h2>
+                <p class="muted">Controls for inclusive travel support and transparent AI behavior.</p>
+                <div class="feature-grid">
+                    <button class="feature-card action-card" onclick="toggleAccessibility('high-contrast')"><span data-icon="access"></span><h3>High contrast</h3><p>Increase contrast for readability.</p></button>
+                    <button class="feature-card action-card" onclick="toggleAccessibility('large-text')"><span data-icon="access"></span><h3>Large text</h3><p>Scale interface text for comfort.</p></button>
+                    <button class="feature-card action-card" onclick="toggleAccessibility('reduced-motion')"><span data-icon="access"></span><h3>Reduced motion</h3><p>Minimize animations and transitions.</p></button>
+                    <div class="feature-card"><span data-icon="shield"></span><h3>Privacy first</h3><p>Prototype data stays in localStorage. Future backend should use consent, encryption and data minimization.</p></div>
+                </div>
+            </section>
+
             <section class="content-section" id="myChallenges">
-                <h2>Your Challenges</h2>
-                <p style="color: var(--text-light); margin-bottom: 20px;">
-                    Track your travel challenges and earn achievements!
-                </p>
+                <h2>Challenges & Gamification</h2>
+                <p class="muted">Complete plans, unlock badges, scan attractions and improve your traveler level.</p>
                 <div id="challengesList"></div>
             </section>
 
-            <!-- Community Section -->
             <section class="content-section" id="community">
                 <h2>Community & Discussion</h2>
-                
-                <div style="display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <button class="btn btn-primary" onclick="showTab('communityPosts')" style="flex: 1; max-width: 200px;">
-                        Posts
-                    </button>
-                    <button class="btn btn-secondary" onclick="showTab('askLocals')" style="flex: 1; max-width: 200px;">
-                        Ask Locals
-                    </button>
+                <div class="filter-row">
+                    <button onclick="showTab('communityPosts')">Posts</button>
+                    <button onclick="showTab('askLocals')">Ask Locals</button>
                 </div>
-
-                <!-- Posts Tab -->
                 <div id="communityPosts" style="display: block;">
-                    <h3 style="margin-bottom: 20px;">Recent Posts</h3>
-                    <div class="form-container" style="margin-bottom: 30px;">
+                    <h3 class="section-title">Recent Posts</h3>
+                    <div class="form-container">
                         <div class="form-group">
                             <label for="newPostContent">Share Your Experience</label>
                             <textarea id="newPostContent" placeholder="What's your experience in Morocco?"></textarea>
                         </div>
                         <button class="btn btn-primary" onclick="addPost()">Post</button>
                     </div>
-                    <div id="postsList"></div>
+                    <div id="postsList" class="mt-20"></div>
                 </div>
-
-                <!-- Ask Locals Tab -->
                 <div id="askLocals" style="display: none;">
-                    <h3 style="margin-bottom: 20px;">Ask Local Experts</h3>
-                    <div class="form-container" style="margin-bottom: 30px;">
+                    <h3 class="section-title">Ask Local Experts</h3>
+                    <div class="form-container">
                         <div class="form-group">
                             <label for="questionContent">Your Question</label>
                             <textarea id="questionContent" placeholder="Ask locals anything about Morocco..."></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="questionCity">Related to City</label>
+                            <label for="questionCity">Related City</label>
                             <select id="questionCity">
                                 <option value="">Select a city</option>
                                 <option value="Marrakech">Marrakech</option>
@@ -288,27 +328,17 @@
                         </div>
                         <button class="btn btn-primary" onclick="addQuestion()">Ask Question</button>
                     </div>
-                    <div id="questionsList"></div>
+                    <div id="questionsList" class="mt-20"></div>
                 </div>
             </section>
 
-            <!-- Blog Section -->
             <section class="content-section" id="blog">
-                <h2>Blog & Travel Stories</h2>
-                <p style="color: var(--text-light); margin-bottom: 20px;">
-                    Read inspiring travel stories and tips from our community.
-                </p>
-
-                <div class="form-container" style="margin-bottom: 30px;">
-                    <h3>Write a Blog Post</h3>
-                    <div class="form-group">
-                        <label for="blogTitle">Title</label>
-                        <input type="text" id="blogTitle" placeholder="Enter blog post title">
-                    </div>
-                    <div class="form-group">
-                        <label for="blogContent">Content</label>
-                        <textarea id="blogContent" placeholder="Write your travel story..."></textarea>
-                    </div>
+                <h2>Travel Journal</h2>
+                <p class="muted">Write stories, reviews and travel memories.</p>
+                <div class="form-container">
+                    <h3>Write a Journal Post</h3>
+                    <div class="form-group"><label for="blogTitle">Title</label><input type="text" id="blogTitle" placeholder="Enter post title"></div>
+                    <div class="form-group"><label for="blogContent">Content</label><textarea id="blogContent" placeholder="Write your story..."></textarea></div>
                     <div class="form-group">
                         <label for="blogCity">City</label>
                         <select id="blogCity">
@@ -323,11 +353,21 @@
                     </div>
                     <button class="btn btn-primary" onclick="addBlogPost()">Publish Post</button>
                 </div>
-
-                <div id="blogList"></div>
+                <div id="blogList" class="mt-20"></div>
             </section>
 
-            <!-- Profile Section -->
+            <section class="content-section" id="analytics">
+                <h2>Tourism Analytics Dashboard</h2>
+                <p class="muted">Prototype view for authorities: trends, impact and sustainability indicators.</p>
+                <div class="metric-grid" id="analyticsGrid"></div>
+                <div class="analytics-panel">
+                    <div style="height:45%; width:72%;"></div>
+                    <div style="height:70%; width:48%;"></div>
+                    <div style="height:35%; width:62%;"></div>
+                    <div style="height:82%; width:54%;"></div>
+                </div>
+            </section>
+
             <section class="content-section" id="profile">
                 <div class="profile-container">
                     <div class="profile-header">
@@ -335,57 +375,32 @@
                         <h2 id="profileName">User Name</h2>
                         <p id="profileEmail">user@email.com</p>
                         <div class="profile-stats">
-                            <div class="stat">
-                                <div class="stat-value" id="statPosts">0</div>
-                                <div class="stat-label">Posts</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value" id="statChallenges">0</div>
-                                <div class="stat-label">Challenges</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value" id="statCities">0</div>
-                                <div class="stat-label">Cities Visited</div>
-                            </div>
+                            <div class="stat"><div class="stat-value" id="statPosts">0</div><div class="stat-label">Posts</div></div>
+                            <div class="stat"><div class="stat-value" id="statChallenges">0</div><div class="stat-label">Challenges</div></div>
+                            <div class="stat"><div class="stat-value" id="statCities">0</div><div class="stat-label">Cities Visited</div></div>
                         </div>
                     </div>
-
-                    <div class="form-container" style="margin-top: 30px;">
+                    <div class="form-container">
                         <h3>Edit Profile</h3>
-                        <div class="form-group">
-                            <label for="editName">Full Name</label>
-                            <input type="text" id="editName" placeholder="Enter your full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="editEmail">Email</label>
-                            <input type="email" id="editEmail" placeholder="Enter your email" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="editPhone">Phone</label>
-                            <input type="tel" id="editPhone" placeholder="Enter your phone number">
-                        </div>
-                        <div class="form-group">
-                            <label for="editBio">Bio</label>
-                            <textarea id="editBio" placeholder="Tell us about yourself..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="editLocation">Location</label>
-                            <input type="text" id="editLocation" placeholder="Your location">
-                        </div>
+                        <div class="form-group"><label for="editName">Full Name</label><input type="text" id="editName" placeholder="Enter your full name"></div>
+                        <div class="form-group"><label for="editEmail">Email</label><input type="email" id="editEmail" placeholder="Enter your email" disabled></div>
+                        <div class="form-group"><label for="editPhone">Phone</label><input type="tel" id="editPhone" placeholder="Enter your phone number"></div>
+                        <div class="form-group"><label for="editBio">Bio</label><textarea id="editBio" placeholder="Tell us about yourself..."></textarea></div>
+                        <div class="form-group"><label for="editLocation">Location</label><input type="text" id="editLocation" placeholder="Your location"></div>
                         <button class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
                     </div>
                 </div>
             </section>
-        </div>
+        </main>
     </div>
 
-    <!-- Scripts -->
     <script src="js/data.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/plan.js"></script>
     <script src="js/community.js"></script>
     <script src="js/profile.js"></script>
+    <script src="js/features.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

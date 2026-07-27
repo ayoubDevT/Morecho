@@ -89,6 +89,9 @@ function loadMainApp() {
     document.getElementById('mainContainer').classList.add('active');
     updateUserDisplay();
     initializeDashboard();
+    if (typeof initializeAdvancedFeatures === 'function') {
+        initializeAdvancedFeatures();
+    }
 }
 
 function updateUserDisplay() {

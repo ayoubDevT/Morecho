@@ -10,7 +10,7 @@ function initializeCitySelector() {
         const card = document.createElement('div');
         card.className = 'city-card';
         card.innerHTML = `
-            <h4>${cityData[city].emoji}</h4>
+            <h4>${cityData[city].code}</h4>
             <p>${city}</p>
         `;
         card.onclick = () => selectCity(city, card);

@@ -283,6 +283,66 @@ textarea:focus {
     height: 38px;
 }
 
+.brand-lockup {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.brand-lockup img {
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.brand-lockup strong {
+    color: inherit;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.auth-brand {
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.auth-brand img {
+    width: min(260px, 86vw);
+    max-height: 96px;
+}
+
+.header-brand {
+    width: 100px;
+    height: 42px;
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.94);
+}
+
+.header-brand strong {
+    color: var(--secondary-color);
+    font-size: 18px;
+}
+
+.mode-btn {
+    min-height: 38px;
+    padding: 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    fill: currentColor;
+}
+
 /* ============ MOBILE NAVIGATION ============ */
 .sidebar {
     position: fixed;
@@ -320,6 +380,8 @@ textarea:focus {
     font-weight: 800;
     text-align: center;
     text-decoration: none;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .sidebar-menu a.active,
@@ -341,6 +403,8 @@ textarea:focus {
     border-radius: var(--border-radius);
     background: #fff;
     box-shadow: var(--box-shadow);
+    max-height: min(420px, calc(100vh - var(--header-height) - var(--nav-height) - 28px));
+    overflow-y: auto;
 }
 
 .submenu.active {
@@ -352,6 +416,351 @@ textarea:focus {
     border-radius: var(--border-radius);
     background: var(--surface-soft);
     font-size: 13px;
+}
+
+.hero-panel {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 18px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background:
+        linear-gradient(135deg, rgba(213, 31, 42, 0.1), rgba(4, 115, 76, 0.13)),
+        var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.hero-panel h2 {
+    margin: 8px 0 10px;
+    font-size: 28px;
+    line-height: 1.12;
+}
+
+.hero-panel p,
+.muted {
+    color: var(--text-light);
+}
+
+.eyebrow,
+.pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #edf8f3;
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.metric-grid,
+.feature-grid,
+.recommendation-grid,
+.emergency-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0 24px;
+}
+
+.metric-card,
+.feature-card,
+.recommendation-card,
+.location-card,
+.route-card,
+.emergency-card,
+.chat-panel,
+.passport-cover {
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.metric-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+}
+
+.metric-card .icon {
+    color: var(--primary-color);
+}
+
+.metric-card strong {
+    display: block;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.metric-card span {
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.card > span[data-icon],
+.feature-card > .icon,
+.feature-card > span[data-icon],
+.recommendation-card .pill {
+    margin-bottom: 12px;
+}
+
+.card > span[data-icon] {
+    display: inline-flex;
+    color: var(--secondary-color);
+}
+
+.feature-card,
+.recommendation-card,
+.route-card {
+    padding: 16px;
+}
+
+.feature-card {
+    display: block;
+    color: inherit;
+    text-align: left;
+}
+
+.feature-card .icon,
+.route-card .icon,
+.passport-cover .icon {
+    color: var(--primary-color);
+}
+
+.feature-card h3,
+.recommendation-card h3,
+.location-card h3,
+.route-card h3 {
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.feature-card p,
+.recommendation-card p,
+.location-card p,
+.route-card p {
+    margin-bottom: 8px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.action-card {
+    width: 100%;
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.section-title {
+    margin: 24px 0 12px;
+    color: var(--primary-color);
+}
+
+.app-grid,
+.map-layout {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.filter-row button {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 0 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: #fff;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.chat-panel {
+    min-height: 330px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding: 14px;
+}
+
+.chat-bubble {
+    width: fit-content;
+    max-width: 88%;
+    margin-bottom: 10px;
+    padding: 12px 13px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+.chat-bubble.ai {
+    background: var(--surface-soft);
+    color: var(--text-dark);
+}
+
+.chat-bubble.user {
+    margin-left: auto;
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.morocco-map {
+    position: relative;
+    min-height: 380px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 54% 22%, rgba(4, 115, 76, 0.2), transparent 12%),
+        radial-gradient(circle at 36% 62%, rgba(213, 31, 42, 0.18), transparent 16%),
+        linear-gradient(155deg, #f8f3e8, #dceee3);
+}
+
+.morocco-map::before {
+    content: "";
+    position: absolute;
+    inset: 10% 22% 12% 24%;
+    border-radius: 44% 48% 38% 58%;
+    background: rgba(255, 255, 255, 0.55);
+    border: 2px solid rgba(4, 115, 76, 0.22);
+}
+
+.map-pin {
+    position: absolute;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+.location-card {
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.location-card dl {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.location-card dt {
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.location-card dd {
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.passport-cover {
+    padding: 22px;
+    background: linear-gradient(135deg, var(--secondary-color), #315f24);
+    color: #fff;
+}
+
+.passport-cover .icon,
+.passport-cover p {
+    color: #fff;
+}
+
+.stamp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.stamp {
+    min-height: 86px;
+    border: 2px dashed var(--border);
+    border-radius: var(--border-radius);
+    background: #fff;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.stamp span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.stamp.unlocked {
+    border-color: var(--secondary-color);
+    background: #edf8f3;
+    color: var(--secondary-color);
+}
+
+.emergency-card {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.emergency-card .icon {
+    color: var(--primary-color);
+}
+
+.analytics-panel {
+    height: 280px;
+    display: flex;
+    align-items: end;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.analytics-panel div {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+}
+
+body.high-contrast {
+    --page-bg: #050505;
+    --surface: #111;
+    --surface-soft: #1c1c1c;
+    --text-dark: #fff;
+    --text-light: #d8d8d8;
+    --border: #555;
+}
+
+body.large-text {
+    font-size: 18px;
+}
+
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
 }
 
 /* ============ CONTENT ============ */
@@ -722,6 +1131,18 @@ textarea:focus {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .metric-grid,
+    .feature-grid,
+    .recommendation-grid,
+    .emergency-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .two-col,
+    .map-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    }
+
     .city-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -777,6 +1198,7 @@ textarea:focus {
     .sidebar-menu .menu-item {
         height: auto;
         justify-content: flex-start;
+        flex-direction: row;
         padding: 16px 20px;
         font-size: 15px;
         text-align: left;
@@ -804,7 +1226,7 @@ textarea:focus {
     }
 
     .submenu.active {
-        max-height: 140px;
+        max-height: 520px;
     }
 
     .submenu a {
@@ -823,6 +1245,17 @@ textarea:focus {
     .dashboard-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 18px;
+    }
+
+    .metric-grid,
+    .feature-grid,
+    .recommendation-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .hero-panel {
+        grid-template-columns: 1fr auto;
+        align-items: end;
     }
 
     .city-grid {

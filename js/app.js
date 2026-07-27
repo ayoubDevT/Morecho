@@ -12,6 +12,10 @@ function initializeApp() {
     } else {
         document.getElementById('authContainer').classList.remove('hidden');
     }
+
+    if (typeof initializeAdvancedFeatures === 'function') {
+        initializeAdvancedFeatures();
+    }
 }
 
 function setupEventListeners() {

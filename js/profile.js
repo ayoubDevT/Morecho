@@ -25,7 +25,8 @@ function loadProfile() {
     
     const totalPosts = userPosts.length + userBlogs.length;
     const completedChallenges = userChallenges.filter(c => c.status === 'completed').length;
-    const citiesVisited = new Set(userChallenges.map(c => c.city)).size;
+    const passportCities = state.passport?.stamps || [];
+    const citiesVisited = new Set([...userChallenges.map(c => c.city), ...passportCities]).size;
 
     document.getElementById('statPosts').textContent = totalPosts;
     document.getElementById('statChallenges').textContent = completedChallenges;
