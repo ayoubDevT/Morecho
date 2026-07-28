@@ -20,6 +20,8 @@ class AppState {
         this.passport.scannedItems = this.passport.scannedItems || [];
         this.passport.sustainableScore = this.passport.sustainableScore ?? 42;
         this.passport.xp = this.passport.xp ?? 120;
+        this.selectedMapLocationId = null;
+        this.currentMapFilter = 'all';
     }
 
     save() {
@@ -196,12 +198,120 @@ const iconPaths = {
 };
 
 const mapLocations = [
-    { id: 1, city: 'Marrakech', name: 'Jemaa el-Fnaa', category: 'UNESCO', x: 36, y: 62, price: 'Free', duration: '2 hours', hours: 'Open all day', accessible: true, desc: 'Lively public square with storytellers, food stalls and music.' },
-    { id: 2, city: 'Casablanca', name: 'Hassan II Mosque', category: 'Monument', x: 46, y: 46, price: '130 MAD', duration: '1.5 hours', hours: 'Guided visits', accessible: true, desc: 'Oceanfront mosque and one of Morocco most iconic landmarks.' },
-    { id: 3, city: 'Fes', name: 'Fes Medina', category: 'UNESCO', x: 58, y: 34, price: 'Free', duration: '4 hours', hours: 'Best daytime', accessible: false, desc: 'Medieval old city with craft streets, madrasas and souks.' },
-    { id: 4, city: 'Agadir', name: 'Agadir Beach', category: 'Beach', x: 28, y: 73, price: 'Free', duration: '3 hours', hours: 'Open all day', accessible: true, desc: 'Long Atlantic beach with cafés, surfing and sunset walks.' },
-    { id: 5, city: 'Rabat', name: 'Hassan Tower', category: 'Monument', x: 50, y: 40, price: 'Free', duration: '1 hour', hours: '9 AM - 6 PM', accessible: true, desc: 'Historic minaret beside the Mausoleum of Mohammed V.' },
-    { id: 6, city: 'Tangier', name: 'Cape Spartel', category: 'Nature', x: 53, y: 20, price: 'Free', duration: '1 hour', hours: 'Open all day', accessible: false, desc: 'Scenic point where the Atlantic meets the Mediterranean.' }
+    {
+        id: 1,
+        city: 'Marrakech',
+        name: 'Jemaa el-Fnaa',
+        category: 'UNESCO',
+        x: 36,
+        y: 62,
+        lat: 31.6258,
+        lng: -7.9891,
+        price: 'Free',
+        duration: '2 hours',
+        hours: 'Open all day; best after 5 PM',
+        accessible: true,
+        rating: '4.8',
+        distance: 'Medina center',
+        nearby: 'Koutoubia Mosque',
+        photo: 'linear-gradient(135deg, #c94325, #f0b35b 52%, #385f31)',
+        desc: 'Lively public square with storytellers, food stalls, orange juice stands and evening music.'
+    },
+    {
+        id: 2,
+        city: 'Casablanca',
+        name: 'Hassan II Mosque',
+        category: 'Monument',
+        x: 46,
+        y: 46,
+        lat: 33.6084,
+        lng: -7.6327,
+        price: '130 MAD guided tour',
+        duration: '1.5 hours',
+        hours: 'Guided visits outside prayer times',
+        accessible: true,
+        rating: '4.9',
+        distance: '3 km from Casa Port',
+        nearby: 'Corniche Ain Diab',
+        photo: 'linear-gradient(135deg, #216f85, #e9d8b5 48%, #315f24)',
+        desc: 'Oceanfront mosque with dramatic Atlantic views, zellige, carved plaster and a towering minaret.'
+    },
+    {
+        id: 3,
+        city: 'Fes',
+        name: 'Fes Medina',
+        category: 'UNESCO',
+        x: 58,
+        y: 34,
+        lat: 34.0630,
+        lng: -4.9778,
+        price: 'Free; guide recommended',
+        duration: '4 hours',
+        hours: 'Best daytime',
+        accessible: false,
+        rating: '4.7',
+        distance: 'Bab Bou Jeloud entrance',
+        nearby: 'Al Quaraouiyine',
+        photo: 'linear-gradient(135deg, #226b5f, #d8a14e 48%, #7a3b1c)',
+        desc: 'Medieval old city with craft streets, madrasas, tanneries and dense souk routes.'
+    },
+    {
+        id: 4,
+        city: 'Agadir',
+        name: 'Agadir Beach',
+        category: 'Beach',
+        x: 28,
+        y: 73,
+        lat: 30.4213,
+        lng: -9.5981,
+        price: 'Free',
+        duration: '3 hours',
+        hours: 'Open all day',
+        accessible: true,
+        rating: '4.6',
+        distance: 'Waterfront promenade',
+        nearby: 'Souk El Had',
+        photo: 'linear-gradient(135deg, #1976a3, #f1d08a 55%, #e07142)',
+        desc: 'Long Atlantic beach with cafes, surfing schools, family walks and sunset views.'
+    },
+    {
+        id: 5,
+        city: 'Rabat',
+        name: 'Hassan Tower',
+        category: 'Monument',
+        x: 50,
+        y: 40,
+        lat: 34.0240,
+        lng: -6.8222,
+        price: 'Free',
+        duration: '1 hour',
+        hours: '9 AM - 6 PM',
+        accessible: true,
+        rating: '4.6',
+        distance: 'Near Bouregreg tram',
+        nearby: 'Mausoleum Mohammed V',
+        photo: 'linear-gradient(135deg, #c84435, #e8d9b8 50%, #04734c)',
+        desc: 'Historic minaret and ceremonial plaza beside the Mausoleum of Mohammed V.'
+    },
+    {
+        id: 6,
+        city: 'Tangier',
+        name: 'Cape Spartel',
+        category: 'Nature',
+        x: 53,
+        y: 20,
+        lat: 35.7916,
+        lng: -5.9239,
+        price: 'Free viewpoint',
+        duration: '1 hour',
+        hours: 'Open all day',
+        accessible: false,
+        rating: '4.5',
+        distance: '14 km from Tangier',
+        nearby: 'Caves of Hercules',
+        photo: 'linear-gradient(135deg, #0b6e80, #91b56f 48%, #f0c36c)',
+        desc: 'Scenic point where the Atlantic meets the Mediterranean, with lighthouse views.'
+    }
 ];
 
 const worldCupData = [

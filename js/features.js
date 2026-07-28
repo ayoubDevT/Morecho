@@ -111,46 +111,157 @@ function renderRecommendations() {
     `).join('');
 }
 
+let morEchoLeafletMap = null;
+let morEchoLeafletMarkers = [];
+
 function renderInteractiveMap(filter = 'all') {
     const map = document.getElementById('moroccoMap');
     const list = document.getElementById('mapLocationList');
     if (!map || !list) return;
 
+    state.currentMapFilter = filter;
     const filtered = filter === 'all' ? mapLocations : mapLocations.filter(item => item.category === filter);
-    map.innerHTML = filtered.map(location => `
-        <button class="map-pin" style="left:${location.x}%; top:${location.y}%;" onclick="selectMapLocation(${location.id})" aria-label="${escapeHTML(location.name)}">
+
+    if (window.L && map.offsetParent !== null) {
+        renderLeafletMap(map, filtered);
+    } else {
+        renderStaticMap(map, filtered);
+    }
+
+    renderMapLocationList(list, filtered);
+}
+
+function renderStaticMap(map, filtered) {
+    map.classList.remove('real-map');
+    map.innerHTML = `
+        ${renderMapRoads(filtered)}
+        ${filtered.map(location => `
+        <button class="map-pin ${location.category.toLowerCase()} ${location.id === state.selectedMapLocationId ? 'active' : ''}" style="left:${location.x}%; top:${location.y}%;" onclick="selectMapLocation(${location.id})" aria-label="${escapeHTML(location.name)}">
             ${icon('map')}
         </button>
-    `).join('');
+        <span class="map-city-label" style="left:${location.x}%; top:${location.y}%;">${escapeHTML(location.city)}</span>
+        `).join('')}
+    `;
+}
 
-    list.innerHTML = filtered.map(location => locationCard(location)).join('');
+function renderMapLocationList(list, filtered) {
+    list.innerHTML = (state.selectedMapLocationId
+        ? filtered.filter(location => location.id === state.selectedMapLocationId)
+        : filtered
+    ).map(location => locationCard(location)).join('');
+}
+
+function renderLeafletMap(mapElement, filtered) {
+    mapElement.classList.add('real-map');
+
+    if (!morEchoLeafletMap) {
+        mapElement.innerHTML = '';
+        morEchoLeafletMap = L.map(mapElement, {
+            zoomControl: true,
+            scrollWheelZoom: false
+        }).setView([31.9, -6.2], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(morEchoLeafletMap);
+    }
+
+    morEchoLeafletMarkers.forEach(marker => marker.remove());
+    morEchoLeafletMarkers = filtered.map(location => {
+        const marker = L.marker([location.lat, location.lng], {
+            icon: L.divIcon({
+                className: '',
+                html: `<span class="leaflet-morocco-pin ${location.category.toLowerCase()} ${location.id === state.selectedMapLocationId ? 'active' : ''}">${icon('map')}</span>`,
+                iconSize: [38, 38],
+                iconAnchor: [19, 32],
+                popupAnchor: [0, -30]
+            })
+        }).addTo(morEchoLeafletMap);
+
+        marker.bindPopup(`
+            <strong>${escapeHTML(location.name)}</strong><br>
+            ${escapeHTML(location.city)} - ${escapeHTML(location.category)}<br>
+            ${escapeHTML(location.hours)}
+        `);
+        marker.on('click', () => selectMapLocation(location.id));
+        return marker;
+    });
+
+    const selected = filtered.find(location => location.id === state.selectedMapLocationId);
+    if (selected) {
+        morEchoLeafletMap.setView([selected.lat, selected.lng], 12, { animate: true });
+    } else if (filtered.length) {
+        morEchoLeafletMap.fitBounds(filtered.map(location => [location.lat, location.lng]), {
+            padding: [32, 32],
+            maxZoom: 7
+        });
+    }
+
+    setTimeout(() => morEchoLeafletMap.invalidateSize(), 0);
 }
 
 function locationCard(location) {
     return `
-        <div class="location-card">
-            <div>
+        <div class="location-card" onclick="selectMapLocation(${location.id})">
+            <div class="location-photo" style="--photo: ${location.photo};"></div>
+            <div class="location-body">
                 <span class="pill">${escapeHTML(location.category)}</span>
                 <h3>${escapeHTML(location.name)}</h3>
                 <p>${escapeHTML(location.city)} - ${escapeHTML(location.desc)}</p>
-            </div>
+                <div class="location-meta">
+                    <span>${escapeHTML(location.rating)} rating</span>
+                    <span>${location.accessible ? 'Wheelchair notes' : 'Limited access'}</span>
+                    <span>${escapeHTML(location.distance)}</span>
+                </div>
             <dl>
                 <div><dt>Hours</dt><dd>${escapeHTML(location.hours)}</dd></div>
                 <div><dt>Price</dt><dd>${escapeHTML(location.price)}</dd></div>
                 <div><dt>Visit</dt><dd>${escapeHTML(location.duration)}</dd></div>
+                <div><dt>Nearby</dt><dd>${escapeHTML(location.nearby)}</dd></div>
             </dl>
+            </div>
         </div>
     `;
 }
 
 function filterMap(category) {
+    state.selectedMapLocationId = null;
     renderInteractiveMap(category);
 }
 
 function selectMapLocation(id) {
     const location = mapLocations.find(item => item.id === id);
     if (!location) return;
+    state.selectedMapLocationId = id;
+    renderInteractiveMap(state.currentMapFilter || 'all');
     document.getElementById('mapLocationList').innerHTML = locationCard(location);
+}
+
+function renderMapRoads(locations) {
+    const cityPoints = {};
+    locations.forEach(location => {
+        cityPoints[location.city] = location;
+    });
+
+    const roads = [
+        ['Tangier', 'Rabat', 'main'],
+        ['Rabat', 'Casablanca', 'main'],
+        ['Casablanca', 'Marrakech', 'main'],
+        ['Marrakech', 'Agadir', 'secondary'],
+        ['Rabat', 'Fes', 'secondary']
+    ];
+
+    return roads.map(([from, to, type]) => {
+        const start = cityPoints[from] || mapLocations.find(location => location.city === from);
+        const end = cityPoints[to] || mapLocations.find(location => location.city === to);
+        if (!start || !end) return '';
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const length = Math.sqrt((dx * dx) + (dy * dy));
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        return `<span class="map-road ${type === 'main' ? 'main' : ''}" style="left:${start.x}%; top:${start.y}%; width:${length}%; transform: rotate(${angle}deg);"></span>`;
+    }).join('');
 }
 
 function renderWorldCupMode() {

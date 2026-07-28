@@ -307,12 +307,12 @@ textarea:focus {
 }
 
 .auth-brand img {
-    width: min(260px, 86vw);
-    max-height: 96px;
+    width: min(300px, 88vw);
+    max-height: 104px;
 }
 
 .header-brand {
-    width: 100px;
+    width: 118px;
     height: 42px;
     padding: 4px 8px;
     border-radius: var(--border-radius);
@@ -614,51 +614,283 @@ textarea:focus {
     color: #fff;
 }
 
-.morocco-map {
-    position: relative;
-    min-height: 380px;
+.map-shell {
     border: 1px solid var(--border);
     border-radius: var(--border-radius);
     overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.map-toolbar {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+}
+
+.map-toolbar strong,
+.map-toolbar span {
+    display: block;
+}
+
+.map-toolbar strong {
+    color: var(--text-dark);
+    font-size: 15px;
+}
+
+.map-toolbar span {
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.map-toolbar button {
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface-soft);
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.morocco-map {
+    position: relative;
+    min-height: 380px;
+    height: min(62vh, 560px);
+    overflow: hidden;
     background:
-        radial-gradient(circle at 54% 22%, rgba(4, 115, 76, 0.2), transparent 12%),
-        radial-gradient(circle at 36% 62%, rgba(213, 31, 42, 0.18), transparent 16%),
-        linear-gradient(155deg, #f8f3e8, #dceee3);
+        linear-gradient(105deg, transparent 0 18%, rgba(73, 144, 196, 0.26) 18% 23%, transparent 23%),
+        radial-gradient(circle at 54% 24%, rgba(130, 186, 116, 0.35), transparent 15%),
+        radial-gradient(circle at 43% 47%, rgba(220, 190, 119, 0.38), transparent 18%),
+        radial-gradient(circle at 24% 76%, rgba(232, 197, 117, 0.44), transparent 23%),
+        linear-gradient(155deg, #f7f0df 0%, #e5efd9 42%, #f0dcaf 100%);
+    isolation: isolate;
+}
+
+.morocco-map.real-map {
+    background: #e6efe8;
+}
+
+.morocco-map.real-map::before,
+.morocco-map.real-map::after {
+    display: none;
+}
+
+.morocco-map.real-map .leaflet-control-attribution {
+    font-size: 10px;
 }
 
 .morocco-map::before {
     content: "";
     position: absolute;
-    inset: 10% 22% 12% 24%;
-    border-radius: 44% 48% 38% 58%;
-    background: rgba(255, 255, 255, 0.55);
-    border: 2px solid rgba(4, 115, 76, 0.22);
+    inset: 5% 18% 9% 19%;
+    clip-path: polygon(43% 0, 60% 7%, 70% 17%, 67% 31%, 73% 42%, 63% 55%, 57% 70%, 43% 92%, 24% 100%, 18% 87%, 24% 72%, 15% 61%, 23% 45%, 19% 30%, 32% 17%);
+    background:
+        linear-gradient(110deg, rgba(255,255,255,.35), transparent 34%),
+        linear-gradient(180deg, rgba(97, 158, 82, 0.28), rgba(241, 224, 175, 0.72));
+    border: 3px solid rgba(57, 116, 58, 0.36);
+    filter: drop-shadow(0 16px 20px rgba(32, 37, 34, 0.15));
+    z-index: 0;
+}
+
+.morocco-map::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(68deg, transparent 46%, rgba(255,255,255,.5) 46.3% 47%, transparent 47.3%),
+        linear-gradient(24deg, transparent 41%, rgba(255,255,255,.45) 41.3% 42%, transparent 42.3%),
+        linear-gradient(145deg, transparent 57%, rgba(255,255,255,.4) 57.3% 58%, transparent 58.3%),
+        repeating-linear-gradient(0deg, rgba(36, 87, 74, .08) 0 1px, transparent 1px 46px),
+        repeating-linear-gradient(90deg, rgba(36, 87, 74, .07) 0 1px, transparent 1px 46px);
+    pointer-events: none;
+}
+
+.map-road {
+    position: absolute;
+    z-index: 1;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 2px rgba(218, 153, 48, 0.45);
+    transform-origin: left center;
+}
+
+.map-road.main {
+    height: 7px;
+    background: #fff9e8;
+    box-shadow: 0 0 0 3px rgba(213, 31, 42, 0.25);
+}
+
+.map-city-label {
+    position: absolute;
+    z-index: 3;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #26342c;
+    font-size: 11px;
+    font-weight: 900;
+    transform: translate(-50%, 18px);
+    box-shadow: 0 4px 10px rgba(32, 37, 34, 0.12);
 }
 
 .map-pin {
     position: absolute;
-    z-index: 2;
-    width: 42px;
-    height: 42px;
+    z-index: 4;
+    width: 38px;
+    height: 38px;
     display: grid;
     place-items: center;
     border: 3px solid #fff;
-    border-radius: 50%;
+    border-radius: 50% 50% 50% 8px;
     background: var(--primary-color);
     color: #fff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(-45deg);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.map-pin .icon {
+    width: 18px;
+    height: 18px;
+    transform: rotate(45deg);
+}
+
+.map-pin:hover,
+.map-pin.active {
+    transform: translate(-50%, -58%) rotate(-45deg) scale(1.08);
+    box-shadow: 0 13px 22px rgba(0, 0, 0, 0.28);
+}
+
+.map-pin.unesco {
+    background: var(--secondary-color);
+}
+
+.map-pin.monument {
+    background: var(--primary-color);
+}
+
+.map-pin.beach {
+    background: #1976a3;
+}
+
+.map-pin.nature {
+    background: #5c7f2c;
+}
+
+.leaflet-morocco-pin {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 3px solid #fff;
+    border-radius: 50% 50% 50% 8px;
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
+    transform: rotate(-45deg);
+}
+
+.leaflet-morocco-pin .icon {
+    width: 18px;
+    height: 18px;
+    transform: rotate(45deg);
+}
+
+.leaflet-morocco-pin.active {
+    box-shadow: 0 0 0 4px rgba(242, 181, 68, 0.38), 0 12px 22px rgba(0, 0, 0, 0.26);
+}
+
+.leaflet-morocco-pin.unesco {
+    background: var(--secondary-color);
+}
+
+.leaflet-morocco-pin.monument {
+    background: var(--primary-color);
+}
+
+.leaflet-morocco-pin.beach {
+    background: #1976a3;
+}
+
+.leaflet-morocco-pin.nature {
+    background: #5c7f2c;
+}
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    background: #fff;
+}
+
+.map-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.legend-pin {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-color);
+}
+
+.legend-pin.unesco {
+    background: var(--secondary-color);
+}
+
+.legend-pin.monument {
+    background: var(--primary-color);
+}
+
+.legend-pin.beach {
+    background: #1976a3;
+}
+
+.legend-pin.nature {
+    background: #5c7f2c;
 }
 
 .location-card {
-    padding: 16px;
+    overflow: hidden;
+    padding: 0;
     margin-bottom: 12px;
+}
+
+.location-photo {
+    min-height: 112px;
+    background:
+        linear-gradient(135deg, rgba(0,0,0,.08), rgba(0,0,0,.18)),
+        var(--photo);
+    background-size: cover;
+    background-position: center;
+}
+
+.location-body {
+    padding: 16px;
 }
 
 .location-card dl {
     display: grid;
-    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     margin-top: 12px;
 }
 
@@ -670,6 +902,22 @@ textarea:focus {
 
 .location-card dd {
     color: var(--text-dark);
+    font-weight: 800;
+}
+
+.location-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.location-meta span {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: var(--surface-soft);
+    color: var(--text-light);
+    font-size: 12px;
     font-weight: 800;
 }
 
