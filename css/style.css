@@ -355,6 +355,20 @@ textarea:focus {
     white-space: nowrap;
 }
 
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    min-height: 42px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+}
+
+.icon-btn .icon {
+    width: 19px;
+    height: 19px;
+}
+
 .icon {
     width: 20px;
     height: 20px;
@@ -1078,12 +1092,180 @@ textarea:focus {
 }
 
 body.high-contrast {
+    --primary-color: #ff5b66;
+    --secondary-color: #44e0a0;
+    --accent-color: #ffd166;
     --page-bg: #050505;
-    --surface: #111;
-    --surface-soft: #1c1c1c;
+    --surface: #141414;
+    --surface-soft: #222;
     --text-dark: #fff;
-    --text-light: #d8d8d8;
-    --border: #555;
+    --text-light: #e2e2e2;
+    --border: #666;
+    --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    color-scheme: dark;
+}
+
+body.high-contrast {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 320px),
+        var(--page-bg);
+}
+
+body.high-contrast .auth-container {
+    background:
+        linear-gradient(145deg, rgba(80, 12, 16, 0.96), rgba(3, 56, 38, 0.96)),
+        var(--page-bg);
+}
+
+body.high-contrast .header,
+body.high-contrast .passport-cover {
+    background: linear-gradient(135deg, #7f1119, #07573c);
+}
+
+body.high-contrast .header-brand {
+    background: #fff;
+}
+
+body.high-contrast .sidebar,
+body.high-contrast .submenu,
+body.high-contrast .map-toolbar,
+body.high-contrast .map-legend,
+body.high-contrast .filter-row button,
+body.high-contrast .post-actions button,
+body.high-contrast .form-group input,
+body.high-contrast select,
+body.high-contrast textarea {
+    background: var(--surface);
+    color: var(--text-dark);
+}
+
+body.high-contrast .form-group input::placeholder,
+body.high-contrast textarea::placeholder {
+    color: #bcbcbc;
+}
+
+body.high-contrast option {
+    background: var(--surface);
+    color: var(--text-dark);
+}
+
+body.high-contrast .sidebar {
+    box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.45);
+}
+
+body.high-contrast .sidebar-menu a,
+body.high-contrast .sidebar-menu .menu-item,
+body.high-contrast .submenu a,
+body.high-contrast .map-legend span,
+body.high-contrast .metric-card span,
+body.high-contrast .feature-card p,
+body.high-contrast .recommendation-card p,
+body.high-contrast .location-card p,
+body.high-contrast .route-card p,
+body.high-contrast .post-author-info p,
+body.high-contrast .post-card p,
+body.high-contrast .challenge-card p,
+body.high-contrast .leaderboard-user p,
+body.high-contrast .stat-label,
+body.high-contrast .comment-item p,
+body.high-contrast .challenge-steps,
+body.high-contrast .location-card dt,
+body.high-contrast .location-meta span,
+body.high-contrast .toggle-auth,
+body.high-contrast .muted {
+    color: var(--text-light);
+}
+
+body.high-contrast .sidebar-menu a:hover,
+body.high-contrast .sidebar-menu .menu-item:hover,
+body.high-contrast .sidebar-menu a.active,
+body.high-contrast .sidebar-menu .menu-item.active,
+body.high-contrast .leaderboard-row.current-user {
+    background: rgba(255, 91, 102, 0.16);
+    color: var(--primary-color);
+}
+
+body.high-contrast .eyebrow,
+body.high-contrast .pill,
+body.high-contrast .card-icon,
+body.high-contrast .location-meta span,
+body.high-contrast .stamp.unlocked,
+body.high-contrast .city-card.selected,
+body.high-contrast .proof-uploader input[type="file"] {
+    background: #102f24;
+    color: var(--secondary-color);
+    border-color: rgba(68, 224, 160, 0.55);
+}
+
+body.high-contrast .hero-panel .eyebrow {
+    background: rgba(16, 47, 36, 0.92);
+}
+
+body.high-contrast .badge-token,
+body.high-contrast .challenge-status.pending {
+    background: #3d2c00;
+    color: var(--accent-color);
+}
+
+body.high-contrast .challenge-status.completed,
+body.high-contrast .alert-success {
+    background: #113823;
+    color: #bff8d3;
+    border-color: #2a7d4d;
+}
+
+body.high-contrast .alert-error {
+    background: #3f1016;
+    color: #ffd7dc;
+    border-color: #9c3845;
+}
+
+body.high-contrast .alert-info {
+    background: #102f3c;
+    color: #cdefff;
+    border-color: #34738f;
+}
+
+body.high-contrast .stamp {
+    background: var(--surface);
+    color: var(--text-light);
+}
+
+body.high-contrast .text-success {
+    color: #8ff0b5;
+}
+
+body.high-contrast .text-danger {
+    color: #ff9aa3;
+}
+
+body.high-contrast .chat-bubble.user,
+body.high-contrast .btn-secondary {
+    background: #0f7d57;
+    color: #fff;
+}
+
+body.high-contrast .morocco-map {
+    background:
+        linear-gradient(105deg, transparent 0 18%, rgba(65, 150, 210, 0.24) 18% 23%, transparent 23%),
+        linear-gradient(155deg, #1b211d 0%, #243529 48%, #352d18 100%);
+}
+
+body.high-contrast .map-city-label {
+    background: rgba(20, 20, 20, 0.94);
+    color: var(--text-dark);
+}
+
+body.high-contrast .leaflet-popup-content-wrapper,
+body.high-contrast .leaflet-popup-tip,
+body.high-contrast .leaflet-control-zoom a,
+body.high-contrast .leaflet-control-attribution {
+    background: var(--surface);
+    color: var(--text-dark);
+}
+
+body.high-contrast .leaflet-control-zoom a {
+    border-color: var(--border);
 }
 
 body.large-text {
@@ -1764,27 +1946,11 @@ body.reduced-motion *::after {
 
     .mode-btn,
     .logout-btn {
-        min-width: 42px;
+        width: 38px;
+        min-width: 38px;
         min-height: 36px;
-        padding: 0 8px;
-    }
-
-    .mode-btn {
-        font-size: 0;
-    }
-
-    .mode-btn::before {
-        content: "Aa";
-        font-size: 13px;
-    }
-
-    .logout-btn {
-        font-size: 0;
-    }
-
-    .logout-btn::before {
-        content: "Out";
-        font-size: 12px;
+        height: 36px;
+        padding: 0;
     }
 
     .user-avatar {

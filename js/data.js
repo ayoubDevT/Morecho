@@ -279,6 +279,8 @@ const iconPaths = {
     chart: 'M4 19h16v2H4v-2zm2-2V9h3v8H6zm5 0V4h3v13h-3zm5 0v-6h3v6h-3z',
     users: 'M7 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm10 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM2 21a5 5 0 0 1 10 0H2zm11 0a4 4 0 0 1 8 0h-8z',
     user: 'M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm-8 9a8 8 0 0 1 16 0H4z',
+    contrast: 'M12 2a10 10 0 1 0 0 20V2zm0 2v16a8 8 0 0 1 0-16z',
+    logout: 'M5 3h8v2H7v14h6v2H5V3zm11 5l5 4-5 4v-3H10v-2h6V8z',
     book: 'M5 4h12a2 2 0 0 1 2 2v15H7a2 2 0 0 1-2-2V4zm3 4h8m-8 4h8'
 };
 
