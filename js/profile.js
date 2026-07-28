@@ -121,6 +121,7 @@ function loadChallenges() {
 function challengeTemplateCard(template) {
     return `
         <div class="challenge-card challenge-template">
+            <div class="challenge-cover" style="--photo: ${cityData[template.city]?.photo};"></div>
             <div class="challenge-card-head">
                 <div>
                     <span class="pill">${escapeHTML(template.category)}</span>
@@ -158,6 +159,7 @@ function challengeProgressCard(challenge) {
 
         return `
             <div class="challenge-card">
+                <div class="challenge-cover" style="--photo: ${cityData[city]?.photo || cityData.Marrakech.photo};"></div>
                 <div class="challenge-card-head">
                     <div>
                         <span class="pill">${escapeHTML(challenge.category || 'Plan')}</span>

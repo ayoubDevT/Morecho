@@ -56,6 +56,7 @@ const cityData = {
     'Marrakech': {
         code: 'MRK',
         description: 'The Red City',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Jamaa%20El%20Fna%20%28Marrakesch%2C%20Marokko%29%2001.jpg?width=1200')",
         hotels: [
             { name: 'Riad Dar Anika', price: '\$80-150', rating: '5 stars', desc: 'Luxury riad in the medina' },
             { name: 'Atlas Almohad Hotel', price: '\$50-100', rating: '4 stars', desc: 'Modern comfort with pool' },
@@ -78,6 +79,7 @@ const cityData = {
     'Tangier': {
         code: 'TNG',
         description: 'Gateway to Africa',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Cap%20Spartel.jpg?width=1200')",
         hotels: [
             { name: 'Hilton Tangier', price: '\$100-150', rating: '5 stars', desc: 'Beachfront luxury' },
             { name: 'La Tangerine', price: '\$60-120', rating: '4 stars', desc: 'Charming boutique hotel' },
@@ -100,6 +102,7 @@ const cityData = {
     'Fes': {
         code: 'FES',
         description: 'The Spiritual Heart',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Bab%20Bou%20Jeloud%20Frame%20Minaret%20Fes%20Nov25%20A7CR%2009127-8%20HDR3.jpg?width=1200')",
         hotels: [
             { name: 'Palais Jamai', price: '\$120-180', rating: '5 stars', desc: 'Stunning palace hotel' },
             { name: 'Riad Fes', price: '\$90-150', rating: '4 stars', desc: 'Traditional riad luxury' },
@@ -122,6 +125,7 @@ const cityData = {
     'Agadir': {
         code: 'AGA',
         description: 'Beach Paradise',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/%2212%20Kilometer%20beeindruckender%20Sandstrand%22.%2001.jpg?width=1200')",
         hotels: [
             { name: 'Sofitel Agadir Royal Bay', price: '\$120-180', rating: '5 stars', desc: 'Luxury beach resort' },
             { name: 'Atlantic Palace', price: '\$80-130', rating: '4 stars', desc: 'Modern beachfront hotel' },
@@ -144,6 +148,7 @@ const cityData = {
     'Rabat': {
         code: 'RBA',
         description: 'The Capital',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Hassan%20Tower.jpg?width=1200')",
         hotels: [
             { name: 'Sofitel Rabat Jardin', price: '\$130-180', rating: '5 stars', desc: 'Luxury garden hotel' },
             { name: 'Riad Dar Anika', price: '\$80-140', rating: '4 stars', desc: 'Traditional riad' },
@@ -166,6 +171,7 @@ const cityData = {
     'Casablanca': {
         code: 'CAS',
         description: 'The White City',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Hassan%20II.%20Moschee%2011.jpg?width=1200')",
         hotels: [
             { name: 'Royal Mansour', price: '\$200+', rating: '5 stars', desc: 'Ultra-luxury palace hotel' },
             { name: 'Sofitel Casablanca', price: '\$120-180', rating: '5 stars', desc: 'Oceanfront luxury' },
@@ -293,7 +299,7 @@ const mapLocations = [
         rating: '4.8',
         distance: 'Medina center',
         nearby: 'Koutoubia Mosque',
-        photo: 'linear-gradient(135deg, #c94325, #f0b35b 52%, #385f31)',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Jamaa%20El%20Fna%20%28Marrakesch%2C%20Marokko%29%2001.jpg?width=1200')",
         desc: 'Lively public square with storytellers, food stalls, orange juice stands and evening music.'
     },
     {
@@ -312,7 +318,7 @@ const mapLocations = [
         rating: '4.9',
         distance: '3 km from Casa Port',
         nearby: 'Corniche Ain Diab',
-        photo: 'linear-gradient(135deg, #216f85, #e9d8b5 48%, #315f24)',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Hassan%20II.%20Moschee%2011.jpg?width=1200')",
         desc: 'Oceanfront mosque with dramatic Atlantic views, zellige, carved plaster and a towering minaret.'
     },
     {
@@ -331,7 +337,7 @@ const mapLocations = [
         rating: '4.7',
         distance: 'Bab Bou Jeloud entrance',
         nearby: 'Al Quaraouiyine',
-        photo: 'linear-gradient(135deg, #226b5f, #d8a14e 48%, #7a3b1c)',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Tanneries%20in%20Fes.jpg?width=1200')",
         desc: 'Medieval old city with craft streets, madrasas, tanneries and dense souk routes.'
     },
     {
@@ -350,7 +356,7 @@ const mapLocations = [
         rating: '4.6',
         distance: 'Waterfront promenade',
         nearby: 'Souk El Had',
-        photo: 'linear-gradient(135deg, #1976a3, #f1d08a 55%, #e07142)',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/%2212%20Kilometer%20beeindruckender%20Sandstrand%22.%2001.jpg?width=1200')",
         desc: 'Long Atlantic beach with cafes, surfing schools, family walks and sunset views.'
     },
     {
@@ -369,7 +375,7 @@ const mapLocations = [
         rating: '4.6',
         distance: 'Near Bouregreg tram',
         nearby: 'Mausoleum Mohammed V',
-        photo: 'linear-gradient(135deg, #c84435, #e8d9b8 50%, #04734c)',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Hassan%20Tower.jpg?width=1200')",
         desc: 'Historic minaret and ceremonial plaza beside the Mausoleum of Mohammed V.'
     },
     {
@@ -388,7 +394,7 @@ const mapLocations = [
         rating: '4.5',
         distance: '14 km from Tangier',
         nearby: 'Caves of Hercules',
-        photo: 'linear-gradient(135deg, #0b6e80, #91b56f 48%, #f0c36c)',
+        photo: "url('https://commons.wikimedia.org/wiki/Special:FilePath/Cap%20Spartel.jpg?width=1200')",
         desc: 'Scenic point where the Atlantic meets the Mediterranean, with lighthouse views.'
     }
 ];

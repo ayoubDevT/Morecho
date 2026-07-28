@@ -23,7 +23,9 @@
 body {
     min-height: 100vh;
     overflow-x: hidden;
-    background: var(--page-bg);
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.45), transparent 360px),
+        var(--page-bg);
     color: var(--text-dark);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.5;
@@ -419,16 +421,21 @@ textarea:focus {
 }
 
 .hero-panel {
+    position: relative;
     display: grid;
     gap: 18px;
     margin-bottom: 18px;
-    padding: 22px;
+    padding: 26px;
     border: 1px solid var(--border);
     border-radius: var(--border-radius);
     background:
-        linear-gradient(135deg, rgba(213, 31, 42, 0.1), rgba(4, 115, 76, 0.13)),
-        var(--surface);
-    box-shadow: var(--box-shadow);
+        linear-gradient(90deg, rgba(14, 25, 20, 0.82), rgba(14, 25, 20, 0.42)),
+        url('https://commons.wikimedia.org/wiki/Special:FilePath/Jamaa%20El%20Fna%20%28Marrakesch%2C%20Marokko%29%2001.jpg?width=1600');
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    box-shadow: 0 18px 42px rgba(32, 37, 34, 0.18);
+    overflow: hidden;
 }
 
 .hero-panel h2 {
@@ -440,6 +447,15 @@ textarea:focus {
 .hero-panel p,
 .muted {
     color: var(--text-light);
+}
+
+.hero-panel p {
+    max-width: 680px;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.hero-panel .eyebrow {
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .eyebrow,
@@ -517,6 +533,27 @@ textarea:focus {
 .feature-card,
 .recommendation-card,
 .route-card {
+    padding: 16px;
+}
+
+.recommendation-card {
+    overflow: hidden;
+    padding: 0;
+}
+
+.recommendation-media {
+    min-height: 138px;
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.22)),
+        var(--photo);
+    background-position: center;
+    background-size: cover;
+}
+
+.recommendation-body {
     padding: 16px;
 }
 
@@ -872,12 +909,14 @@ textarea:focus {
     overflow: hidden;
     padding: 0;
     margin-bottom: 12px;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .location-photo {
-    min-height: 112px;
+    min-height: 156px;
     background:
-        linear-gradient(135deg, rgba(0,0,0,.08), rgba(0,0,0,.18)),
+        linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.2)),
         var(--photo);
     background-size: cover;
     background-position: center;
@@ -919,6 +958,15 @@ textarea:focus {
     color: var(--text-light);
     font-size: 12px;
     font-weight: 800;
+}
+
+.image-credit {
+    display: inline-flex;
+    margin-top: 12px;
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
 }
 
 .passport-cover {
@@ -1062,6 +1110,16 @@ body.reduced-motion *::after {
     min-height: 104px;
     padding: 16px;
     cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card:hover,
+.feature-card:hover,
+.recommendation-card:hover,
+.location-card:hover {
+    border-color: rgba(4, 115, 76, 0.32);
+    box-shadow: 0 14px 34px rgba(32, 37, 34, 0.12);
+    transform: translateY(-2px);
 }
 
 .card h3 {
@@ -1164,6 +1222,17 @@ body.reduced-motion *::after {
 .challenge-card h4 {
     margin-bottom: 6px;
     color: var(--primary-color);
+}
+
+.challenge-cover {
+    min-height: 128px;
+    margin: -16px -16px 14px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.22)),
+        var(--photo);
+    background-position: center;
+    background-size: cover;
 }
 
 .game-dashboard {
@@ -1291,6 +1360,10 @@ body.reduced-motion *::after {
 .earned-badge strong,
 .earned-badge span {
     display: block;
+}
+
+.recommendation-media .pill {
+    margin-bottom: 0;
 }
 
 .challenge-status {

@@ -103,10 +103,14 @@ function renderRecommendations() {
 
     container.innerHTML = cities.slice(0, 4).map(city => `
         <div class="recommendation-card">
-            <div class="pill">${cityData[city].code}</div>
-            <h3>${city}</h3>
-            <p>${cityData[city].description}</p>
-            <span>${cityData[city].monuments[0].name}</span>
+            <div class="recommendation-media" style="--photo: ${cityData[city].photo};">
+                <span class="pill">${cityData[city].code}</span>
+            </div>
+            <div class="recommendation-body">
+                <h3>${city}</h3>
+                <p>${cityData[city].description}</p>
+                <span>${cityData[city].monuments[0].name}</span>
+            </div>
         </div>
     `).join('');
 }
@@ -220,6 +224,7 @@ function locationCard(location) {
                 <div><dt>Visit</dt><dd>${escapeHTML(location.duration)}</dd></div>
                 <div><dt>Nearby</dt><dd>${escapeHTML(location.nearby)}</dd></div>
             </dl>
+            <a class="image-credit" href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Image: Wikimedia Commons</a>
             </div>
         </div>
     `;
