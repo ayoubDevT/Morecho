@@ -46,7 +46,14 @@ function loadPosts() {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     postsList.innerHTML = sortedPosts.map(post => {
-        const user = state.users.find(u => u.id === post.userId);
+        const commentsHtml = (post.comments || []).map(comment => `
+            <div class="comment-item">
+                <strong>${escapeHTML(comment.author)}</strong>
+                <p>${escapeHTML(comment.text)}</p>
+                <span>${getTimeAgo(comment.createdAt)}</span>
+            </div>
+        `).join('') || '<p class="muted">No comments yet. Join the conversation.</p>';
+
         return `
             <div class="post-card">
                 <div class="post-header">
@@ -64,6 +71,11 @@ function loadPosts() {
                     <button onclick="commentPost(${post.id})">Comment</button>
                     <button onclick="sharePost(${post.id})">Share</button>
                 </div>
+                <div class="comment-list">${commentsHtml}</div>
+                <div class="comment-entry">
+                    <textarea id="commentInput-${post.id}" placeholder="Write a comment..."></textarea>
+                    <button class="btn btn-secondary" onclick="submitPostComment(${post.id})">Comment</button>
+                </div>
             </div>
         `;
     }).join('');
@@ -79,20 +91,70 @@ function likePost(postId) {
 }
 
 function commentPost(postId) {
-    const comment = prompt('Add your comment:');
-    if (comment) {
-        const post = state.posts.find(p => p.id === postId);
-        if (post) {
-            post.comments.push({
-                userId: state.currentUser.id,
-                author: state.currentUser.name,
-                text: comment,
-                createdAt: new Date().toISOString()
-            });
-            state.save();
-            showAlert('Comment added!', 'success');
-            loadPosts();
-        }
+    const textarea = document.getElementById(`commentInput-${postId}`);
+    if (textarea) {
+        textarea.focus();
+    }
+}
+
+function submitPostComment(postId) {
+    if (!state.currentUser) {
+        showAlert('Please login first', 'error');
+        return;
+    }
+
+    const textarea = document.getElementById(`commentInput-${postId}`);
+    if (!textarea) return;
+
+    const comment = textarea.value.trim();
+    if (!comment) {
+        showAlert('Write a comment before posting', 'error');
+        return;
+    }
+
+    const post = state.posts.find(p => p.id === postId);
+    if (post) {
+        post.comments.push({
+            userId: state.currentUser.id,
+            author: state.currentUser.name,
+            text: comment,
+            createdAt: new Date().toISOString()
+        });
+        state.save();
+        textarea.value = '';
+        showAlert('Comment added!', 'success');
+        loadPosts();
+    }
+}
+
+function submitBlogComment(postId) {
+    if (!state.currentUser) {
+        showAlert('Please login first', 'error');
+        return;
+    }
+
+    const textarea = document.getElementById(`blogCommentInput-${postId}`);
+    if (!textarea) return;
+
+    const comment = textarea.value.trim();
+    if (!comment) {
+        showAlert('Write a comment before posting', 'error');
+        return;
+    }
+
+    const post = state.blogPosts.find(p => p.id === postId);
+    if (post) {
+        post.comments = post.comments || [];
+        post.comments.push({
+            userId: state.currentUser.id,
+            author: state.currentUser.name,
+            text: comment,
+            createdAt: new Date().toISOString()
+        });
+        state.save();
+        textarea.value = '';
+        showAlert('Comment added to journal post!', 'success');
+        loadBlogPosts();
     }
 }
 
@@ -200,34 +262,52 @@ function addBlogPost() {
     const title = document.getElementById('blogTitle').value.trim();
     const content = document.getElementById('blogContent').value.trim();
     const city = document.getElementById('blogCity').value;
+    const imageUrl = document.getElementById('blogImageUrl').value.trim();
+    const imageFile = document.getElementById('blogImageFile').files[0];
 
     if (!title || !content || !city) {
         showAlert('Please fill in all fields', 'error');
         return;
     }
 
-    const blogPost = {
-        id: Date.now(),
-        userId: state.currentUser.id,
-        author: state.currentUser.name,
-        avatar: state.currentUser.avatar,
-        title: title,
-        content: content,
-        city: city,
-        type: 'blog',
-        likes: 0,
-        views: 0,
-        createdAt: new Date().toISOString()
-    };
+    function saveBlogPost(finalImageUrl) {
+        const blogPost = {
+            id: Date.now(),
+            userId: state.currentUser.id,
+            author: state.currentUser.name,
+            avatar: state.currentUser.avatar,
+            title: title,
+            content: content,
+            city: city,
+            imageUrl: finalImageUrl,
+            type: 'blog',
+            likes: 0,
+            views: 0,
+            comments: [],
+            createdAt: new Date().toISOString()
+        };
 
-    state.blogPosts.push(blogPost);
-    state.save();
+        state.blogPosts.push(blogPost);
+        state.save();
 
-    document.getElementById('blogTitle').value = '';
-    document.getElementById('blogContent').value = '';
-    document.getElementById('blogCity').value = '';
-    showAlert('Blog post published successfully!', 'success');
-    loadBlogPosts();
+        document.getElementById('blogTitle').value = '';
+        document.getElementById('blogContent').value = '';
+        document.getElementById('blogCity').value = '';
+        document.getElementById('blogImageUrl').value = '';
+        document.getElementById('blogImageFile').value = '';
+        showAlert('Blog post published successfully!', 'success');
+        loadBlogPosts();
+    }
+
+    if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            saveBlogPost(event.target.result);
+        };
+        reader.readAsDataURL(imageFile);
+    } else {
+        saveBlogPost(imageUrl || '');
+    }
 }
 
 function loadBlogPosts() {
@@ -242,6 +322,14 @@ function loadBlogPosts() {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     blogList.innerHTML = sortedBlogs.map(post => {
+        const commentsHtml = (post.comments || []).map(comment => `
+            <div class="comment-item">
+                <strong>${escapeHTML(comment.author)}</strong>
+                <p>${escapeHTML(comment.text)}</p>
+                <span>${getTimeAgo(comment.createdAt)}</span>
+            </div>
+        `).join('') || '<p class="muted">No comments yet. Start the conversation!</p>';
+
         return `
             <div class="post-card">
                 <div class="post-header">
@@ -254,11 +342,17 @@ function loadBlogPosts() {
                     </div>
                 </div>
                 <h4 style="color: var(--primary-color); margin-bottom: 10px;">${escapeHTML(post.title)}</h4>
-                <p>${escapeHTML(post.content.substring(0, 200))}${post.content.length > 200 ? '...' : ''}</p>
+                ${post.imageUrl ? `<div class="post-image"><img src="${escapeHTML(post.imageUrl)}" alt="${escapeHTML(post.title)}"></div>` : ''}
+                <p>${escapeHTML(post.content.substring(0, 220))}${post.content.length > 220 ? '...' : ''}</p>
                 <div class="post-actions">
                     <button onclick="readBlogPost(${post.id})">Read More</button>
                     <button onclick="likeBlogPost(${post.id})">Like (${post.likes})</button>
                     <button onclick="shareBlogPost(${post.id})">Share</button>
+                </div>
+                <div class="comment-list">${commentsHtml}</div>
+                <div class="comment-entry">
+                    <textarea id="blogCommentInput-${post.id}" placeholder="Add a comment..."></textarea>
+                    <button class="btn btn-secondary" onclick="submitBlogComment(${post.id})">Comment</button>
                 </div>
             </div>
         `;

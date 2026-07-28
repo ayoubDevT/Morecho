@@ -95,6 +95,7 @@ function initializeDemoData() {
                 bio: 'Travel enthusiast from Marrakech',
                 location: 'Marrakech, Morocco',
                 avatar: 'A',
+                score: 550,
                 isLocal: true,
                 createdAt: new Date().toISOString()
             },
@@ -107,6 +108,7 @@ function initializeDemoData() {
                 bio: 'Exploring Morocco',
                 location: 'New York, USA',
                 avatar: 'S',
+                score: 420,
                 isLocal: false,
                 createdAt: new Date().toISOString()
             }

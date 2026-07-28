@@ -1435,6 +1435,131 @@ body.reduced-motion *::after {
     font-weight: 800;
 }
 
+.post-image {
+    margin: 14px 0;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+.post-image img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    max-height: 240px;
+}
+
+.comment-list {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 10px;
+}
+
+.comment-item {
+    padding: 12px;
+    border-radius: var(--border-radius);
+    background: var(--surface-soft);
+}
+
+.comment-item strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+}
+
+.comment-item p {
+    margin-bottom: 8px;
+    color: var(--text-light);
+}
+
+.comment-item span {
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.comment-entry {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.comment-entry textarea {
+    min-height: 90px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    resize: vertical;
+}
+
+.comment-entry button {
+    width: fit-content;
+    min-height: 44px;
+    padding: 0 16px;
+}
+
+.leaderboard-grid {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.leaderboard-row.current-user {
+    border-color: var(--primary-color);
+    background: rgba(213, 31, 42, 0.06);
+}
+
+.leaderboard-position {
+    min-width: 40px;
+    color: var(--primary-color);
+    font-weight: 900;
+}
+
+.leaderboard-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.leaderboard-user .post-author-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: #4a2d00;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+}
+
+.leaderboard-user strong {
+    display: block;
+    color: var(--text-dark);
+}
+
+.leaderboard-user p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+.leaderboard-score {
+    color: var(--secondary-color);
+    font-weight: 900;
+}
+
 .profile-container {
     max-width: 820px;
     margin: 0 auto;

@@ -274,7 +274,8 @@ function renderWorldCupMode() {
     if (!container) return;
 
     container.innerHTML = worldCupData.map(item => `
-        <div class="feature-card">
+        <div class="feature-card worldcup-card">
+            ${item.photo ? `<div class="post-image"><img src="${escapeHTML(item.photo)}" alt="${escapeHTML(item.stadium)}"></div>` : ''}
             ${icon('trophy')}
             <h3>${escapeHTML(item.city)}</h3>
             <p><strong>Stadium:</strong> ${escapeHTML(item.stadium)}</p>
@@ -283,6 +284,44 @@ function renderWorldCupMode() {
             <p>${escapeHTML(item.tip)}</p>
         </div>
     `).join('');
+}
+
+function renderLeaderboard() {
+    const container = document.getElementById('leaderboardPanel');
+    if (!container) return;
+
+    const currentUserId = state.currentUser?.id;
+    const users = state.users.map(user => ({
+        id: user.id,
+        name: user.name,
+        avatar: user.avatar,
+        score: user.id === currentUserId ? state.passport.score : (user.score || 120)
+    }));
+
+    const sortedUsers = users.sort((a, b) => b.score - a.score);
+    const rankItems = sortedUsers.map((user, index) => `
+        <div class="leaderboard-row ${user.id === currentUserId ? 'current-user' : ''}">
+            <div class="leaderboard-position">#${index + 1}</div>
+            <div class="leaderboard-user">
+                <span class="post-author-avatar">${escapeHTML(user.avatar)}</span>
+                <div>
+                    <strong>${escapeHTML(user.name)}</strong>
+                    <p>${user.id === currentUserId ? 'You' : 'Traveler'}</p>
+                </div>
+            </div>
+            <div class="leaderboard-score">${escapeHTML(user.score)}</div>
+        </div>
+    `).join('');
+
+    container.innerHTML = `
+        <div class="game-score-card">
+            <strong>${state.passport.score}</strong>
+            <p>Your current MorEcho traveler score</p>
+        </div>
+        <div class="leaderboard-grid">
+            ${rankItems}
+        </div>
+    `;
 }
 
 function renderPassport() {

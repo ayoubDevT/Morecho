@@ -56,6 +56,7 @@ function handleRegister() {
         bio: '',
         location: '',
         avatar: name.charAt(0).toUpperCase(),
+        score: state.passport.score || 120,
         createdAt: new Date().toISOString()
     };
 

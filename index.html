@@ -87,6 +87,15 @@
                 <li><a class="menu-item" onclick="showSection('map')"><span data-icon="map"></span>Map</a></li>
                 <li><a class="menu-item" onclick="showSection('askPlan')"><span data-icon="plan"></span>Planner</a></li>
                 <li>
+                    <div class="menu-item" onclick="toggleSubmenu('challengesMenu')"><span data-icon="trophy"></span>Challenges</div>
+                    <div class="submenu" id="challengesMenu">
+                        <a onclick="showSection('myChallenges')">My Challenges</a>
+                        <a onclick="showSection('leaderboard')">Leaderboard</a>
+                    </div>
+                </li>
+                <li><a class="menu-item" onclick="showSection('community')"><span data-icon="community"></span>Community</a></li>
+                <li><a class="menu-item" onclick="showSection('blog')"><span data-icon="journal"></span>Journal</a></li>
+                <li>
                     <div class="menu-item" onclick="toggleSubmenu('moreMenu')"><span data-icon="passport"></span>More</div>
                     <div class="submenu" id="moreMenu">
                         <a onclick="showSection('worldCup')">World Cup</a>
@@ -96,9 +105,6 @@
                         <a onclick="showSection('emergency')">Emergency</a>
                         <a onclick="showSection('recognition')">AI Vision</a>
                         <a onclick="showSection('accessibility')">Accessibility</a>
-                        <a onclick="showSection('community')">Community</a>
-                        <a onclick="showSection('blog')">Journal</a>
-                        <a onclick="showSection('myChallenges')">Challenges</a>
                         <a onclick="showSection('analytics')">Analytics</a>
                         <a onclick="showSection('profile')">Profile</a>
                     </div>
@@ -306,6 +312,12 @@
                 <div id="challengesList"></div>
             </section>
 
+            <section class="content-section" id="leaderboard">
+                <h2>Leaderboard</h2>
+                <p class="muted">Compare your traveler score with other explorers and see where you rank.</p>
+                <div id="leaderboardPanel"></div>
+            </section>
+
             <section class="content-section" id="community">
                 <h2>Community & Discussion</h2>
                 <div class="filter-row">
@@ -366,6 +378,14 @@
                             <option value="Rabat">Rabat</option>
                             <option value="Casablanca">Casablanca</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogImageUrl">Photo URL</label>
+                        <input type="url" id="blogImageUrl" placeholder="Paste an image URL (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="blogImageFile">Upload Photo</label>
+                        <input type="file" id="blogImageFile" accept="image/*">
                     </div>
                     <button class="btn btn-primary" onclick="addBlogPost()">Publish Post</button>
                 </div>

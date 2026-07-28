@@ -37,6 +37,9 @@ function showSection(sectionId) {
         case 'myChallenges':
             loadChallenges();
             break;
+        case 'leaderboard':
+            renderLeaderboard();
+            break;
         case 'community':
             loadPosts();
             loadQuestions();
