@@ -400,12 +400,12 @@ const mapLocations = [
 ];
 
 const worldCupData = [
-    { city: 'Casablanca', stadium: 'Grand Stade Hassan II', fanZone: 'Corniche Fan Walk', transport: 'Train, tram, shuttle buses', tip: 'Arrive 3 hours before kick-off and use public transport.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hassan%20II%20Stadium%20construction%2019-08-2024.jpg?width=1200' },
+    { city: 'Casablanca', stadium: 'Grand Stadium Hassan II - Benslimane-Casablanca', fanZone: 'Corniche Fan Walk', transport: 'Train, tram, shuttle buses', tip: 'Project visual: construction is ongoing, with 115,000 gross seats planned for 2030.', photo: 'https://niya.maroc.ma/wp-content/uploads/2024/08/Grand-Stade-HASSAN-II-de-Benslimane-Casablanca.jpg' },
     { city: 'Rabat', stadium: 'Prince Moulay Abdellah Stadium', fanZone: 'Bouregreg Fan Zone', transport: 'Tram, bus, taxi', tip: 'Stay near Agdal or Hay Riad for easy access.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Moulay%20Abdellah%20Stadium.jpg?width=1200' },
     { city: 'Marrakech', stadium: 'Marrakech Stadium', fanZone: 'Menara Fan Garden', transport: 'Bus, taxi, hotel shuttles', tip: 'Plan evening medina visits after match traffic calms.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade%20de%20marrakech.jpg?width=1200' },
-    { city: 'Tangier', stadium: 'Ibn Batouta Stadium', fanZone: 'Marina Fan Zone', transport: 'Train, bus, taxi', tip: 'Book coastal accommodation early for match weeks.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade%20Ibn%20Batuta,%20Tanger.jpg?width=1200' },
+    { city: 'Tangier', stadium: 'The Grand Stadium of Tangier', fanZone: 'Marina Fan Zone', transport: 'Train, bus, taxi', tip: 'World Cup 2030 upgrade target: 75,600 gross seats and 71,000 net seats.', photo: 'https://niya.maroc.ma/wp-content/uploads/2023/12/Grand-Stade-de-Tanger.jpg' },
     { city: 'Agadir', stadium: 'Adrar Stadium', fanZone: 'Beach Fan Village', transport: 'Bus, taxi, shuttle', tip: 'Combine match day with beach and souk visits.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade-Adrar2019.png?width=1200' },
-    { city: 'Fes', stadium: 'Fes Stadium', fanZone: 'Medina Culture Fan Hub', transport: 'Bus, taxi, train', tip: 'Use licensed guides for dense medina routes.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Complexe%20sportif%20de%20F%C3%A8s.jpg?width=1200' }
+    { city: 'Fes', stadium: 'The Stadium of Fez', fanZone: 'Medina Culture Fan Hub', transport: 'Bus, taxi, train', tip: 'World Cup 2030 upgrade target: 55,800 gross seats and 49,200 net seats.', photo: 'https://niya.maroc.ma/wp-content/uploads/2024/08/Stade-de-Fes-1.jpg' }
 ];
 
 const experiences = [
