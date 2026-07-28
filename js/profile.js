@@ -78,57 +78,232 @@ function loadChallenges() {
 
     const userChallenges = state.challenges.filter(c => c.userId === state.currentUser.id);
     const challengesList = document.getElementById('challengesList');
+    const completedCount = userChallenges.filter(c => c.status === 'completed').length;
+    const activeCount = userChallenges.filter(c => c.status !== 'completed').length;
+    const activeTemplateIds = userChallenges.filter(c => c.status !== 'completed').map(c => c.templateId).filter(Boolean);
+    const availableChallenges = challengeTemplates.filter(template => !activeTemplateIds.includes(template.id));
 
-    if (userChallenges.length === 0) {
-        challengesList.innerHTML = `
-            <div style="text-align: center; padding: 40px;">
-                <p style="color: var(--text-light); margin-bottom: 20px;">
-                    No challenges yet. <a onclick="showSection('askPlan')" style="color: var(--primary-color); cursor: pointer;">Ask for a plan</a> to start your journey!
-                </p>
+    challengesList.innerHTML = `
+        <div class="game-dashboard">
+            <div class="game-score-card">
+                <span>Score</span>
+                <strong>${state.passport.score}</strong>
+                <p>Level ${state.passport.level} traveler</p>
             </div>
-        `;
-        return;
-    }
+            <div class="game-score-card">
+                <span>Completed</span>
+                <strong>${completedCount}</strong>
+                <p>${activeCount} active mission${activeCount === 1 ? '' : 's'}</p>
+            </div>
+            <div class="game-score-card">
+                <span>Badges</span>
+                <strong>${state.passport.badges.length}</strong>
+                <p>${getNextBadgeHint()}</p>
+            </div>
+        </div>
 
-    challengesList.innerHTML = userChallenges.map(challenge => {
+        <h3 class="section-title">Choose a challenge</h3>
+        <div class="challenge-catalog">
+            ${availableChallenges.map(template => challengeTemplateCard(template)).join('') || '<p class="muted">All challenge types are already active. Complete one to unlock it again.</p>'}
+        </div>
+
+        <h3 class="section-title">Your active journey</h3>
+        ${userChallenges.length === 0 ? `
+            <div class="challenge-card empty-game-state">
+                <h4>No active challenges yet</h4>
+                <p>Choose a challenge above or generate a smart plan to start collecting points.</p>
+                <button class="btn btn-primary" onclick="showSection('askPlan')">Generate a plan challenge</button>
+            </div>
+        ` : userChallenges.map(challenge => challengeProgressCard(challenge)).join('')}
+    `;
+}
+
+function challengeTemplateCard(template) {
+    return `
+        <div class="challenge-card challenge-template">
+            <div class="challenge-card-head">
+                <div>
+                    <span class="pill">${escapeHTML(template.category)}</span>
+                    <h4>${escapeHTML(template.title)}</h4>
+                    <p>${escapeHTML(template.city)} - ${escapeHTML(template.points)} points</p>
+                </div>
+                <div class="badge-token">${escapeHTML(template.badge)}</div>
+            </div>
+            <ol class="challenge-steps">
+                ${template.steps.map(step => `<li>${escapeHTML(step)}</li>`).join('')}
+            </ol>
+            <button class="btn btn-secondary" onclick="startChallenge('${template.id}')">Start challenge</button>
+        </div>
+    `;
+}
+
+function challengeProgressCard(challenge) {
         const statusClass = challenge.status === 'completed' ? 'completed' : 'pending';
-        const statusText = challenge.status === 'completed' ? 'Completed' : 'Pending';
-        const city = challenge.city;
+        const statusText = challenge.status === 'completed' ? 'Completed' : 'Photo proof needed';
+        const city = challenge.city || 'Morocco';
+        const title = challenge.title || `${city} Day Plan`;
+        const points = challenge.points || 80;
+        const badge = challenge.badge || `${city} Explorer`;
+        const proofInputId = `proof-${challenge.id}`;
         const actionButton = challenge.status === 'completed'
-            ? ''
-            : `<button class="btn btn-secondary" style="width: 100%;" onclick="completeChallenge(${challenge.id})">
-                Mark as Completed
-            </button>`;
+            ? `<div class="proof-preview">${challenge.proofImage ? `<img src="${challenge.proofImage}" alt="Challenge proof">` : ''}<p>Reward claimed: ${points} points</p></div>`
+            : `
+                <div class="proof-uploader">
+                    <label for="${proofInputId}">Upload photo proof</label>
+                    <input id="${proofInputId}" type="file" accept="image/*" capture="environment">
+                    <textarea id="note-${challenge.id}" placeholder="What did you discover?"></textarea>
+                    <button class="btn btn-secondary" onclick="submitChallengeProof(${challenge.id}, '${proofInputId}')">Submit proof and claim points</button>
+                </div>
+            `;
 
         return `
             <div class="challenge-card">
-                <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div class="challenge-card-head">
                     <div>
-                        <h4>${escapeHTML(city)} Day Plan</h4>
-                        <p style="color: var(--text-light); margin-bottom: 10px;">
-                            Created ${formatDate(challenge.createdAt)}
-                        </p>
+                        <span class="pill">${escapeHTML(challenge.category || 'Plan')}</span>
+                        <h4>${escapeHTML(title)}</h4>
+                        <p>${escapeHTML(city)} - ${points} points - Badge: ${escapeHTML(badge)}</p>
+                        <p class="muted">Created ${formatDate(challenge.createdAt)}</p>
                     </div>
                     <span class="challenge-status ${statusClass}">${statusText}</span>
                 </div>
-                <div style="margin-top: 15px;">
-                    ${actionButton}
-                </div>
+                <p>${escapeHTML(challenge.evidence || 'Take a photo that proves you completed this travel plan.')}</p>
+                ${actionButton}
             </div>
         `;
-    }).join('');
+}
+
+function startChallenge(templateId) {
+    if (!state.currentUser) {
+        showAlert('Please login first', 'error');
+        return;
+    }
+
+    const template = challengeTemplates.find(item => item.id === templateId);
+    if (!template) return;
+
+    state.challenges.push({
+        id: Date.now(),
+        templateId: template.id,
+        userId: state.currentUser.id,
+        city: template.city,
+        title: template.title,
+        category: template.category,
+        points: template.points,
+        badge: template.badge,
+        evidence: template.evidence,
+        steps: template.steps,
+        type: 'photo_challenge',
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+        completedAt: null,
+        proofImage: '',
+        proofNote: ''
+    });
+
+    state.save();
+    showAlert(`${template.title} started. Take a photo to claim points.`, 'success');
+    loadChallenges();
 }
 
 function completeChallenge(challengeId) {
     const challenge = state.challenges.find(c => c.id === challengeId);
     if (challenge) {
-        challenge.status = 'completed';
-        challenge.completedAt = new Date().toISOString();
-        state.save();
-        showAlert('Challenge completed!', 'success');
-        loadChallenges();
-        loadProfile();
+        awardChallenge(challenge, '');
     }
+}
+
+function submitChallengeProof(challengeId, inputId) {
+    const challenge = state.challenges.find(c => c.id === challengeId);
+    const input = document.getElementById(inputId);
+    const note = document.getElementById(`note-${challengeId}`)?.value.trim() || '';
+
+    if (!challenge || !input || !input.files || input.files.length === 0) {
+        showAlert('Please upload a photo as proof first.', 'error');
+        return;
+    }
+
+    const file = input.files[0];
+    if (!file.type.startsWith('image/')) {
+        showAlert('Please choose an image file.', 'error');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => awardChallenge(challenge, reader.result, note);
+    reader.onerror = () => showAlert('Could not read this photo. Try another image.', 'error');
+    reader.readAsDataURL(file);
+}
+
+function awardChallenge(challenge, proofImage, proofNote = '') {
+    if (challenge.status === 'completed') {
+        showAlert('This challenge is already completed.', 'info');
+        return;
+    }
+
+    const points = challenge.points || 80;
+    challenge.status = 'completed';
+    challenge.completedAt = new Date().toISOString();
+    challenge.proofImage = proofImage;
+    challenge.proofNote = proofNote;
+
+    state.passport.score += points;
+    state.passport.xp += points;
+    state.passport.level = Math.max(1, Math.floor(state.passport.score / 250) + 1);
+    state.passport.sustainableScore = Math.min(100, state.passport.sustainableScore + 2);
+    state.passport.completedChallengeIds.push(challenge.id);
+
+    unlockBadge(challenge.badge || `${challenge.city} Explorer`, `Completed ${challenge.title || `${challenge.city} challenge`}.`);
+    applyBadgeRules();
+
+    if (challenge.city && !state.passport.stamps.includes(challenge.city)) {
+        state.passport.stamps.push(challenge.city);
+    }
+
+    state.save();
+    showAlert(`Challenge completed! +${points} points`, 'success');
+    loadChallenges();
+    loadProfile();
+    renderPassport();
+    renderDashboardStats();
+}
+
+function unlockBadge(title, description) {
+    if (!title || state.passport.badges.some(badge => badge.title === title)) return;
+
+    state.passport.badges.push({
+        id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        title,
+        description,
+        earnedAt: new Date().toISOString()
+    });
+}
+
+function applyBadgeRules() {
+    const completedCount = state.challenges.filter(c => c.userId === state.currentUser?.id && c.status === 'completed').length;
+
+    badgeRules.forEach(rule => {
+        const meetsCompleted = !rule.minCompleted || completedCount >= rule.minCompleted;
+        const meetsScore = !rule.minScore || state.passport.score >= rule.minScore;
+        if (meetsCompleted && meetsScore) {
+            unlockBadge(rule.title, rule.description);
+        }
+    });
+}
+
+function getNextBadgeHint() {
+    const completedCount = state.challenges.filter(c => c.userId === state.currentUser?.id && c.status === 'completed').length;
+    const nextRule = badgeRules.find(rule => {
+        const hasBadge = state.passport.badges.some(badge => badge.title === rule.title);
+        if (hasBadge) return false;
+        if (rule.minCompleted) return completedCount < rule.minCompleted;
+        if (rule.minScore) return state.passport.score < rule.minScore;
+        return false;
+    });
+
+    if (!nextRule) return 'All core badges unlocked';
+    if (nextRule.minCompleted) return `${nextRule.minCompleted - completedCount} more completions`;
+    return `${nextRule.minScore - state.passport.score} more points`;
 }
 
 function editProfileInfo() {

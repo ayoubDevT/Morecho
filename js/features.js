@@ -31,9 +31,9 @@ function renderDashboardStats() {
     if (!container) return;
 
     container.innerHTML = [
-        { label: 'AI routes', value: '24/7', icon: 'bot' },
+        { label: 'Traveler score', value: state.passport.score, icon: 'trophy' },
         { label: 'Cities ready', value: cities.length, icon: 'map' },
-        { label: 'Local experiences', value: experiences.length, icon: 'market' },
+        { label: 'Badges earned', value: state.passport.badges.length, icon: 'passport' },
         { label: 'Eco score', value: `${state.passport.sustainableScore}%`, icon: 'shield' }
     ].map(item => `
         <div class="metric-card">
@@ -288,14 +288,23 @@ function renderPassport() {
         const unlocked = state.passport.stamps.includes(city);
         return `<button class="stamp ${unlocked ? 'unlocked' : ''}" onclick="unlockStamp('${city}')">${cityData[city].code}<span>${city}</span></button>`;
     }).join('');
+    const badges = state.passport.badges.length
+        ? state.passport.badges.map(badge => {
+            const title = typeof badge === 'string' ? badge : badge.title;
+            const description = typeof badge === 'string' ? 'Unlocked achievement' : badge.description;
+            return `<div class="earned-badge">${icon('trophy')}<div><strong>${escapeHTML(title)}</strong><span>${escapeHTML(description)}</span></div></div>`;
+        }).join('')
+        : '<p class="muted mt-20">Complete photo challenges to unlock badges.</p>';
 
     container.innerHTML = `
         <div class="passport-cover">
             ${icon('passport')}
             <h3>Moroccan Digital Passport</h3>
-            <p>${state.passport.xp} XP - Sustainable score ${state.passport.sustainableScore}%</p>
+            <p>${state.passport.score} points - Level ${state.passport.level} - ${state.passport.xp} XP - Sustainable score ${state.passport.sustainableScore}%</p>
         </div>
         <div class="stamp-grid">${stamps}</div>
+        <h3 class="section-title">Earned badges</h3>
+        <div class="badge-grid">${badges}</div>
     `;
 }
 
@@ -303,6 +312,8 @@ function unlockStamp(city) {
     if (!state.passport.stamps.includes(city)) {
         state.passport.stamps.push(city);
         state.passport.xp += 50;
+        state.passport.score += 50;
+        state.passport.level = Math.max(1, Math.floor(state.passport.score / 250) + 1);
         state.passport.sustainableScore = Math.min(100, state.passport.sustainableScore + 3);
         state.save();
         showAlert(`${city} stamp unlocked.`, 'success');
@@ -339,6 +350,8 @@ function bookExperience(id) {
         createdAt: new Date().toISOString()
     });
     state.passport.xp += 25;
+    state.passport.score += 25;
+    state.passport.level = Math.max(1, Math.floor(state.passport.score / 250) + 1);
     state.passport.sustainableScore = Math.min(100, state.passport.sustainableScore + 2);
     state.save();
     showAlert('Experience booked and added to your passport.', 'success');
@@ -419,6 +432,8 @@ function analyzeImageHint() {
         createdAt: new Date().toISOString()
     });
     state.passport.xp += 15;
+    state.passport.score += 15;
+    state.passport.level = Math.max(1, Math.floor(state.passport.score / 250) + 1);
     state.save();
     output.innerHTML = `<div class="feature-card">${icon('camera')}<h3>AI recognition result</h3><p>${escapeHTML(sample.result)}</p></div>`;
 }

@@ -1166,6 +1166,133 @@ body.reduced-motion *::after {
     color: var(--primary-color);
 }
 
+.game-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0 22px;
+}
+
+.game-score-card {
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background:
+        linear-gradient(135deg, rgba(213, 31, 42, 0.08), rgba(4, 115, 76, 0.1)),
+        var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.game-score-card span,
+.earned-badge span,
+.challenge-card-head p {
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.game-score-card strong {
+    display: block;
+    margin: 4px 0;
+    color: var(--primary-color);
+    font-size: 32px;
+    line-height: 1;
+}
+
+.challenge-catalog {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.challenge-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.badge-token {
+    max-width: 124px;
+    padding: 7px 9px;
+    border-radius: var(--border-radius);
+    background: #fff7d7;
+    color: #745100;
+    font-size: 12px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.challenge-steps {
+    margin: 12px 0 14px 18px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.proof-uploader {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.proof-uploader label {
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.proof-uploader input[type="file"] {
+    padding: 11px;
+    border: 1px dashed var(--secondary-color);
+    border-radius: var(--border-radius);
+    background: #edf8f3;
+}
+
+.proof-preview {
+    margin-top: 14px;
+}
+
+.proof-preview img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border);
+}
+
+.empty-game-state .btn {
+    margin-top: 12px;
+}
+
+.badge-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.earned-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.earned-badge .icon {
+    color: var(--accent-color);
+}
+
+.earned-badge strong,
+.earned-badge span {
+    display: block;
+}
+
 .challenge-status {
     display: inline-block;
     padding: 5px 10px;
@@ -1382,7 +1509,10 @@ body.reduced-motion *::after {
     .metric-grid,
     .feature-grid,
     .recommendation-grid,
-    .emergency-grid {
+    .emergency-grid,
+    .game-dashboard,
+    .challenge-catalog,
+    .badge-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 

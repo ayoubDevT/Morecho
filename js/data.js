@@ -13,13 +13,23 @@ class AppState {
             badges: [],
             sustainableScore: 42,
             xp: 120,
-            scannedItems: []
+            scannedItems: [],
+            score: 120,
+            level: 1,
+            completedChallengeIds: []
         };
         this.passport.stamps = this.passport.stamps || [];
-        this.passport.badges = this.passport.badges || [];
+        this.passport.badges = (this.passport.badges || []).map(badge => (
+            typeof badge === 'string'
+                ? { id: badge.toLowerCase().replace(/[^a-z0-9]+/g, '-'), title: badge, description: 'Unlocked achievement', earnedAt: new Date().toISOString() }
+                : badge
+        ));
         this.passport.scannedItems = this.passport.scannedItems || [];
+        this.passport.completedChallengeIds = this.passport.completedChallengeIds || [];
         this.passport.sustainableScore = this.passport.sustainableScore ?? 42;
         this.passport.xp = this.passport.xp ?? 120;
+        this.passport.score = this.passport.score ?? this.passport.xp ?? 120;
+        this.passport.level = this.passport.level ?? Math.max(1, Math.floor(this.passport.score / 250) + 1);
         this.selectedMapLocationId = null;
         this.currentMapFilter = 'all';
     }
@@ -178,6 +188,75 @@ const cityData = {
 };
 
 const cities = Object.keys(cityData);
+
+const challengeTemplates = [
+    {
+        id: 'marrakech-storyteller',
+        city: 'Marrakech',
+        title: 'Jemaa el-Fnaa Story Hunter',
+        category: 'Culture',
+        points: 120,
+        badge: 'Marrakech Master',
+        evidence: 'Upload a photo from Jemaa el-Fnaa or nearby Koutoubia.',
+        steps: ['Visit the square', 'Capture a respectful photo', 'Write one sentence about what you discovered']
+    },
+    {
+        id: 'casa-mosque',
+        city: 'Casablanca',
+        title: 'Hassan II Architecture Quest',
+        category: 'Monument',
+        points: 140,
+        badge: 'Atlantic Explorer',
+        evidence: 'Upload a photo of the mosque exterior, ocean view, or zellige detail.',
+        steps: ['Visit Hassan II Mosque', 'Notice one architecture detail', 'Submit your photo proof']
+    },
+    {
+        id: 'fes-craft',
+        city: 'Fes',
+        title: 'Medina Craft Detective',
+        category: 'Craft',
+        points: 150,
+        badge: 'Imperial Cities Champion',
+        evidence: 'Upload a photo from a craft street, madrasa, gate, or tannery viewpoint.',
+        steps: ['Walk with care in the medina', 'Find a traditional craft', 'Share what the craft is']
+    },
+    {
+        id: 'agadir-sunset',
+        city: 'Agadir',
+        title: 'Atlantic Sunset Walk',
+        category: 'Nature',
+        points: 90,
+        badge: 'Coast Guardian',
+        evidence: 'Upload a beach, promenade, or sunset photo.',
+        steps: ['Walk the promenade', 'Use a low-impact route', 'Submit your best travel moment']
+    },
+    {
+        id: 'rabat-heritage',
+        city: 'Rabat',
+        title: 'Capital Heritage Trail',
+        category: 'History',
+        points: 110,
+        badge: 'Heritage Keeper',
+        evidence: 'Upload a photo from Hassan Tower, Oudayas, or Bouregreg.',
+        steps: ['Visit a Rabat heritage spot', 'Read one historical note', 'Upload proof']
+    },
+    {
+        id: 'tangier-horizon',
+        city: 'Tangier',
+        title: 'Two Seas Viewpoint',
+        category: 'Nature',
+        points: 100,
+        badge: 'Gateway Explorer',
+        evidence: 'Upload a photo from Cape Spartel, Caves of Hercules, or the coast.',
+        steps: ['Reach a viewpoint', 'Respect the natural area', 'Submit photo proof']
+    }
+];
+
+const badgeRules = [
+    { id: 'first-proof', title: 'First Proof', description: 'Completed your first verified photo challenge.', icon: 'camera', minCompleted: 1 },
+    { id: 'culture-guardian', title: 'Culture Guardian', description: 'Completed three Moroccan discovery challenges.', icon: 'passport', minCompleted: 3 },
+    { id: 'morocco-legend', title: 'Morocco Legend', description: 'Reached 600 total MorEcho points.', icon: 'trophy', minScore: 600 }
+];
 
 const iconPaths = {
     home: 'M3 11.5 12 4l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z',

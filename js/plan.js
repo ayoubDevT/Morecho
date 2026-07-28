@@ -177,14 +177,31 @@ function generatePlan() {
 }
 
 function addPlanChallenge(city) {
+    const pointsByCity = {
+        Marrakech: 120,
+        Casablanca: 120,
+        Fes: 130,
+        Agadir: 90,
+        Rabat: 110,
+        Tangier: 100
+    };
+
     const challenge = {
         id: Date.now(),
         userId: state.currentUser.id,
         city: city,
+        title: `${city} Smart Plan Quest`,
+        category: 'Plan',
+        points: pointsByCity[city] || 100,
+        badge: `${city} Explorer`,
+        evidence: `Upload a photo from one stop in your ${city} itinerary to prove you followed the plan.`,
+        steps: ['Generate your plan', 'Visit one recommended stop', 'Upload photo proof'],
         type: 'day_plan',
         status: 'pending',
         createdAt: new Date().toISOString(),
-        completedAt: null
+        completedAt: null,
+        proofImage: '',
+        proofNote: ''
     };
 
     state.challenges.push(challenge);
