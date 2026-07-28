@@ -275,7 +275,7 @@ function renderWorldCupMode() {
 
     container.innerHTML = worldCupData.map(item => `
         <div class="feature-card worldcup-card">
-            ${item.photo ? `<div class="post-image"><img src="${escapeHTML(item.photo)}" alt="${escapeHTML(item.stadium)}"></div>` : ''}
+            ${item.photo ? `<div class="stadium-media"><img src="${escapeHTML(item.photo)}" alt="${escapeHTML(item.stadium)}" onerror="this.remove();"></div>` : ''}
             ${icon('trophy')}
             <h3>${escapeHTML(item.city)}</h3>
             <p><strong>Stadium:</strong> ${escapeHTML(item.stadium)}</p>

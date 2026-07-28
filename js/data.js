@@ -400,12 +400,12 @@ const mapLocations = [
 ];
 
 const worldCupData = [
-    { city: 'Casablanca', stadium: 'Grand Stade Hassan II', fanZone: 'Corniche Fan Walk', transport: 'Train, tram, shuttle buses', tip: 'Arrive 3 hours before kick-off and use public transport.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grand%20Stade%20Hassan%20II.jpg?width=1200' },
-    { city: 'Rabat', stadium: 'Prince Moulay Abdellah Stadium', fanZone: 'Bouregreg Fan Zone', transport: 'Tram, bus, taxi', tip: 'Stay near Agdal or Hay Riad for easy access.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Prince%20Moulay%20Abdellah%20Stadium.jpg?width=1200' },
-    { city: 'Marrakech', stadium: 'Marrakech Stadium', fanZone: 'Menara Fan Garden', transport: 'Bus, taxi, hotel shuttles', tip: 'Plan evening medina visits after match traffic calms.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Marrakech%20Stadium.jpg?width=1200' },
-    { city: 'Tangier', stadium: 'Ibn Batouta Stadium', fanZone: 'Marina Fan Zone', transport: 'Train, bus, taxi', tip: 'Book coastal accommodation early for match weeks.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ibn%20Batouta%20Stadium.jpg?width=1200' },
-    { city: 'Agadir', stadium: 'Adrar Stadium', fanZone: 'Beach Fan Village', transport: 'Bus, taxi, shuttle', tip: 'Combine match day with beach and souk visits.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Adrar%20Stadium.jpg?width=1200' },
-    { city: 'Fes', stadium: 'Fes Stadium', fanZone: 'Medina Culture Fan Hub', transport: 'Bus, taxi, train', tip: 'Use licensed guides for dense medina routes.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fes%20Stadium.jpg?width=1200' }
+    { city: 'Casablanca', stadium: 'Grand Stade Hassan II', fanZone: 'Corniche Fan Walk', transport: 'Train, tram, shuttle buses', tip: 'Arrive 3 hours before kick-off and use public transport.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hassan%20II%20Stadium%20construction%2019-08-2024.jpg?width=1200' },
+    { city: 'Rabat', stadium: 'Prince Moulay Abdellah Stadium', fanZone: 'Bouregreg Fan Zone', transport: 'Tram, bus, taxi', tip: 'Stay near Agdal or Hay Riad for easy access.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Moulay%20Abdellah%20Stadium.jpg?width=1200' },
+    { city: 'Marrakech', stadium: 'Marrakech Stadium', fanZone: 'Menara Fan Garden', transport: 'Bus, taxi, hotel shuttles', tip: 'Plan evening medina visits after match traffic calms.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade%20de%20marrakech.jpg?width=1200' },
+    { city: 'Tangier', stadium: 'Ibn Batouta Stadium', fanZone: 'Marina Fan Zone', transport: 'Train, bus, taxi', tip: 'Book coastal accommodation early for match weeks.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade%20Ibn%20Batuta,%20Tanger.jpg?width=1200' },
+    { city: 'Agadir', stadium: 'Adrar Stadium', fanZone: 'Beach Fan Village', transport: 'Bus, taxi, shuttle', tip: 'Combine match day with beach and souk visits.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade-Adrar2019.png?width=1200' },
+    { city: 'Fes', stadium: 'Fes Stadium', fanZone: 'Medina Culture Fan Hub', transport: 'Bus, taxi, train', tip: 'Use licensed guides for dense medina routes.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Complexe%20sportif%20de%20F%C3%A8s.jpg?width=1200' }
 ];
 
 const experiences = [
