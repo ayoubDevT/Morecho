@@ -9,6 +9,7 @@ class AppState {
         this.blogPosts = (JSON.parse(localStorage.getItem('blogPosts')) || []).filter(post => {
             return String(post.title || '').trim().toLowerCase() !== 'mon itinéraire de la semaine';
         });
+        this.plans = JSON.parse(localStorage.getItem('plans')) || [];
         this.bookings = JSON.parse(localStorage.getItem('bookings')) || [];
         this.passport = JSON.parse(localStorage.getItem('passport')) || {
             stamps: [],
@@ -42,6 +43,7 @@ class AppState {
         localStorage.setItem('challenges', JSON.stringify(this.challenges));
         localStorage.setItem('questions', JSON.stringify(this.questions));
         localStorage.setItem('blogPosts', JSON.stringify(this.blogPosts));
+        localStorage.setItem('plans', JSON.stringify(this.plans));
         localStorage.setItem('bookings', JSON.stringify(this.bookings));
         localStorage.setItem('passport', JSON.stringify(this.passport));
     }

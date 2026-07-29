@@ -72,7 +72,6 @@
                     <img src="assets/logo 4.png" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <strong style="display:none;">MorEcho</strong>
                 </div>
-                <h1>AI Tourism Morocco</h1>
             </div>
             <div class="header-right">
                 <button class="mode-btn icon-btn" onclick="toggleAccessibility('high-contrast')" aria-label="Toggle contrast" title="Toggle contrast"><span data-icon="contrast"></span></button>
@@ -84,7 +83,13 @@
         <nav class="sidebar" id="sidebar" aria-label="MorEcho navigation">
             <ul class="sidebar-menu">
                 <li><a class="menu-item active" onclick="showSection('dashboard')"><span data-icon="home"></span>Home</a></li>
-                <li><a class="menu-item" onclick="showSection('askPlan')"><span data-icon="plan"></span>Planner</a></li>
+                <li>
+                    <div class="menu-item" onclick="toggleSubmenu('plannerMenu')"><span data-icon="plan"></span>Planner</div>
+                    <div class="submenu" id="plannerMenu">
+                        <a onclick="showSection('askPlan'); showPlannerTab('addPlan')">Add Plan</a>
+                        <a onclick="showSection('askPlan'); showPlannerTab('historyPlan')">History Plan</a>
+                    </div>
+                </li>
                 <li>
                     <div class="menu-item" onclick="toggleSubmenu('challengesMenu')"><span data-icon="trophy"></span>Challenges</div>
                     <div class="submenu" id="challengesMenu">
@@ -174,34 +179,44 @@
             <section class="content-section" id="askPlan">
                 <h2>Smart Itinerary Planner</h2>
                 <p class="muted">Generate a day plan with hotels, restaurants, budgets and monuments.</p>
-                <div class="form-container">
-                    <div class="form-group">
-                        <label>Select City</label>
-                        <div class="city-grid" id="cityGrid"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="planBudget">Budget (USD)</label>
-                        <select id="planBudget">
-                            <option value="">Select budget range</option>
-                            <option value="budget">Budget ($50-100)</option>
-                            <option value="standard">Standard ($100-250)</option>
-                            <option value="luxury">Luxury ($250+)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="interests">Interests</label>
-                        <select id="interests" multiple>
-                            <option value="history">History & Culture</option>
-                            <option value="beach">Beaches</option>
-                            <option value="food">Food & Dining</option>
-                            <option value="shopping">Shopping</option>
-                            <option value="nature">Nature & Trekking</option>
-                            <option value="nightlife">Nightlife</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary" onclick="generatePlan()">Generate My Plan</button>
+                <div class="planner-tabs" role="tablist" aria-label="Planner menu">
+                    <button class="planner-tab active" type="button" onclick="showPlannerTab('addPlan')" id="addPlanTab">Add Plan</button>
+                    <button class="planner-tab" type="button" onclick="showPlannerTab('historyPlan')" id="historyPlanTab">History Plan</button>
                 </div>
-                <div id="planResult"></div>
+                <div class="planner-panel active" id="addPlanPanel">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label>Select City</label>
+                            <div class="city-grid" id="cityGrid"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="planBudget">Budget</label>
+                            <select id="planBudget">
+                                <option value="mid-range">Mid-range</option>
+                                <option value="budget">Budget</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="planTravelStyle">Travel style</label>
+                            <select id="planTravelStyle">
+                                <option value="solo">Solo</option>
+                                <option value="couple">Couple</option>
+                                <option value="family">Family</option>
+                                <option value="group">Group</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="planInterests">Interests</label>
+                            <input id="planInterests" type="text" placeholder="history, food, shopping" value="history, food">
+                        </div>
+                        <button class="btn btn-primary" onclick="generatePlan()">Generate My Plan</button>
+                    </div>
+                    <div id="planResult"></div>
+                </div>
+                <div class="planner-panel" id="historyPlanPanel">
+                    <div id="planHistory"></div>
+                </div>
             </section>
 
             <section class="content-section" id="worldCup">

@@ -325,9 +325,9 @@ textarea:focus {
 
 .header-brand {
     flex: 0 0 auto;
-    width: 118px;
-    height: 42px;
-    padding: 4px 8px;
+    width: 150px;
+    height: 60px;
+    padding: 6px 10px;
     border-radius: var(--border-radius);
     background: rgba(255, 255, 255, 0.94);
 }
@@ -335,6 +335,11 @@ textarea:focus {
 .header-brand img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
+}
+
+.header-left {
+    align-items: center;
 }
 
 .header-brand strong {
@@ -1406,6 +1411,42 @@ body.reduced-motion *::after {
     padding: 16px;
 }
 
+.planner-tabs {
+    display: inline-grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 420px;
+    gap: 6px;
+    margin: 16px 0;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+}
+
+.planner-tab {
+    min-height: 42px;
+    border: 0;
+    border-radius: calc(var(--border-radius) - 2px);
+    background: transparent;
+    color: var(--text-light);
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.planner-tab.active {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.planner-panel {
+    display: none;
+}
+
+.planner-panel.active {
+    display: block;
+}
+
 .plan-section {
     margin-bottom: 18px;
     padding-bottom: 16px;
@@ -1431,6 +1472,252 @@ body.reduced-motion *::after {
     border-left: 4px solid var(--accent-color);
     border-radius: var(--border-radius);
     background: var(--surface-soft);
+}
+
+.plan-history-list {
+    display: grid;
+    width: 100%;
+    max-width: 680px;
+    gap: 12px;
+}
+
+.plan-history-card,
+.empty-state {
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.plan-history-card {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+}
+
+.plan-history-card h3,
+.empty-state h3 {
+    margin: 8px 0 4px;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.plan-history-card p,
+.empty-state p {
+    color: var(--text-light);
+}
+
+.empty-state {
+    max-width: 680px;
+    padding: 22px 16px;
+}
+
+.empty-state .btn {
+    margin-top: 16px;
+}
+
+.plan-output {
+    width: 100%;
+    max-width: 900px;
+}
+
+.plan-city-banner {
+    padding: 22px 16px;
+    border-radius: var(--border-radius);
+    background: var(--secondary-color);
+    color: #fff;
+    text-align: center;
+}
+
+.plan-city-banner h3 {
+    margin-bottom: 6px;
+    font-size: 24px;
+}
+
+.plan-city-banner p {
+    opacity: 0.88;
+}
+
+.plan-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.plan-city-banner .pill {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+.plan-output-title {
+    margin: 26px 0 12px;
+    padding-left: 12px;
+    border-left: 4px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 19px;
+}
+
+.plan-timeline,
+.plan-dual-card,
+.plan-monuments-grid,
+.plan-tips-grid,
+.food-list {
+    display: grid;
+    gap: 12px;
+}
+
+.food-list {
+    grid-template-columns: repeat(auto-fit, minmax(140px, max-content));
+}
+
+.food-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.plan-timeline-card,
+.plan-option-card,
+.plan-monument-card,
+.plan-tip-card,
+.plan-leaderboard,
+.plan-error {
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    box-shadow: var(--box-shadow);
+}
+
+.plan-timeline-card {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px;
+}
+
+.plan-time {
+    align-self: start;
+    padding: 7px 8px;
+    border-radius: var(--border-radius);
+    background: #fff3f3;
+    color: var(--primary-color);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.plan-timeline-card h4,
+.plan-option-card h4,
+.plan-monument-card h4 {
+    margin-bottom: 5px;
+    color: var(--text-dark);
+    font-size: 16px;
+}
+
+.plan-timeline-card p,
+.plan-option-card p,
+.plan-monument-card p,
+.plan-tip-card p,
+.plan-error p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.plan-note,
+.plan-option-card small,
+.plan-monument-card small {
+    display: block;
+    margin-top: 7px;
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+.badge-heritage {
+    display: inline-flex;
+    margin-top: 8px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: var(--secondary-color);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.plan-option-card,
+.plan-monument-card,
+.plan-tip-card,
+.plan-leaderboard,
+.plan-error {
+    padding: 16px;
+}
+
+.plan-option-card.partner {
+    border-top: 4px solid var(--primary-color);
+}
+
+.plan-option-card.alternative,
+.plan-monument-card {
+    border-top: 4px solid var(--secondary-color);
+}
+
+.plan-option-card > span,
+.plan-monument-card > span,
+.plan-tip-card strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.plan-option-card.partner > span {
+    color: var(--primary-color);
+}
+
+.plan-rewards,
+.plan-challenge {
+    margin-top: 10px;
+    padding: 9px 10px;
+    border-radius: var(--border-radius);
+    background: var(--surface-soft);
+    color: var(--text-dark);
+    font-size: 13px;
+}
+
+.plan-leaderboard {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.plan-leaderboard ul {
+    padding-left: 18px;
+}
+
+.plan-leaderboard p {
+    margin-top: 10px;
+}
+
+.plan-error {
+    max-width: 680px;
+    border-color: rgba(213, 31, 42, 0.28);
+    background: #fff5f5;
+}
+
+.plan-error h3 {
+    margin-bottom: 6px;
+    color: var(--primary-color);
 }
 
 .challenge-card,
@@ -2000,6 +2287,36 @@ body.reduced-motion *::after {
     .alert {
         left: auto;
         width: min(400px, calc(100vw - 24px));
+    }
+
+    .plan-history-card {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+    }
+
+    .plan-history-card .btn {
+        width: auto;
+        min-width: 124px;
+    }
+
+    .plan-dual-card {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .plan-monuments-grid,
+    .plan-tips-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .plan-timeline-card {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-time {
+        width: fit-content;
+        min-width: 86px;
     }
 }
 
