@@ -73,7 +73,6 @@ const cityData = {
             { name: 'Bahia Palace', time: '1-2 hours', desc: 'Beautiful 19th-century palace' },
             { name: 'Jemaa el-Fnaa Square', time: '2 hours', desc: 'Vibrant square with street performers' }
         ],
-        transportation: 'Taxis, Buses, Horse-drawn carriages',
         bestTime: 'Morning'
     },
     'Tangier': {
@@ -96,7 +95,6 @@ const cityData = {
             { name: 'Cape Spartel', time: '1 hour', desc: 'Scenic coastal viewpoint' },
             { name: 'Caves of Hercules', time: '1.5 hours', desc: 'Ancient sea caves' }
         ],
-        transportation: 'Taxis, Buses, Beach shuttles',
         bestTime: 'Afternoon'
     },
     'Fes': {
@@ -119,7 +117,6 @@ const cityData = {
             { name: 'Bab Bou Jeloud Gate', time: '1 hour', desc: 'Iconic blue gate entrance' },
             { name: 'Tanneries of Fes', time: '1.5 hours', desc: 'Traditional leather dyeing' }
         ],
-        transportation: 'Taxis, Walking tours, Local guides',
         bestTime: 'Early morning'
     },
     'Agadir': {
@@ -142,7 +139,6 @@ const cityData = {
             { name: 'Souk El Had', time: '2 hours', desc: 'Weekly market' },
             { name: 'Paradise Valley', time: '3-4 hours', desc: 'Nature reserve with waterfalls' }
         ],
-        transportation: 'Taxis, Buses, Beach shuttles, Car rentals',
         bestTime: 'Morning and afternoon'
     },
     'Rabat': {
@@ -165,7 +161,6 @@ const cityData = {
             { name: 'Medina of Rabat', time: '2-3 hours', desc: 'Historic old town' },
             { name: 'Mausoleum of Mohammed V', time: '1 hour', desc: 'Stunning royal mausoleum' }
         ],
-        transportation: 'Taxis, Buses, Riverside walks',
         bestTime: 'Morning'
     },
     'Casablanca': {
@@ -188,7 +183,6 @@ const cityData = {
             { name: 'Corniche', time: '2 hours', desc: 'Coastal promenade' },
             { name: 'Royal Palace', time: '1 hour', desc: 'Impressive palace grounds' }
         ],
-        transportation: 'Taxis, Buses, Metro, Tram',
         bestTime: 'Morning and evening'
     }
 };
@@ -260,7 +254,7 @@ const challengeTemplates = [
 
 const badgeRules = [
     { id: 'first-proof', title: 'First Proof', description: 'Completed your first verified photo challenge.', icon: 'camera', minCompleted: 1 },
-    { id: 'culture-guardian', title: 'Culture Guardian', description: 'Completed three Moroccan discovery challenges.', icon: 'passport', minCompleted: 3 },
+    { id: 'culture-guardian', title: 'Culture Guardian', description: 'Completed three Moroccan discovery challenges.', icon: 'trophy', minCompleted: 3 },
     { id: 'morocco-legend', title: 'Morocco Legend', description: 'Reached 600 total MorEcho points.', icon: 'trophy', minScore: 600 }
 ];
 
@@ -403,33 +397,17 @@ const mapLocations = [
 ];
 
 const worldCupData = [
-    { city: 'Casablanca', stadium: 'Grand Stadium Hassan II - Benslimane-Casablanca', fanZone: 'Corniche Fan Walk', transport: 'Train, tram, shuttle buses', tip: 'Project visual: construction is ongoing, with 115,000 gross seats planned for 2030.', photo: 'https://niya.maroc.ma/wp-content/uploads/2024/08/Grand-Stade-HASSAN-II-de-Benslimane-Casablanca.jpg' },
-    { city: 'Rabat', stadium: 'Prince Moulay Abdellah Stadium', fanZone: 'Bouregreg Fan Zone', transport: 'Tram, bus, taxi', tip: 'Stay near Agdal or Hay Riad for easy access.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Moulay%20Abdellah%20Stadium.jpg?width=1200' },
-    { city: 'Marrakech', stadium: 'Marrakech Stadium', fanZone: 'Menara Fan Garden', transport: 'Bus, taxi, hotel shuttles', tip: 'Plan evening medina visits after match traffic calms.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade%20de%20marrakech.jpg?width=1200' },
-    { city: 'Tangier', stadium: 'The Grand Stadium of Tangier', fanZone: 'Marina Fan Zone', transport: 'Train, bus, taxi', tip: 'World Cup 2030 upgrade target: 75,600 gross seats and 71,000 net seats.', photo: 'https://niya.maroc.ma/wp-content/uploads/2023/12/Grand-Stade-de-Tanger.jpg' },
-    { city: 'Agadir', stadium: 'Adrar Stadium', fanZone: 'Beach Fan Village', transport: 'Bus, taxi, shuttle', tip: 'Combine match day with beach and souk visits.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade-Adrar2019.png?width=1200' },
-    { city: 'Fes', stadium: 'The Stadium of Fez', fanZone: 'Medina Culture Fan Hub', transport: 'Bus, taxi, train', tip: 'World Cup 2030 upgrade target: 55,800 gross seats and 49,200 net seats.', photo: 'https://niya.maroc.ma/wp-content/uploads/2024/08/Stade-de-Fes-1.jpg' }
-];
-
-const experiences = [
-    { id: 1, title: 'Marrakech Cooking Class', city: 'Marrakech', price: '45 USD', duration: '3 hours', local: 'Amina Kitchen', sustainability: 'Supports women-led cooperative' },
-    { id: 2, title: 'Fes Pottery Workshop', city: 'Fes', price: '35 USD', duration: '2 hours', local: 'Zellige Studio', sustainability: 'Preserves traditional craft' },
-    { id: 3, title: 'Agadir Surf Lesson', city: 'Agadir', price: '30 USD', duration: '2 hours', local: 'Atlantic Surf School', sustainability: 'Beach cleanup included' },
-    { id: 4, title: 'Tangier Food Walk', city: 'Tangier', price: '28 USD', duration: '2.5 hours', local: 'Medina Bites', sustainability: 'Local family businesses' },
-    { id: 5, title: 'Rabat Heritage Tour', city: 'Rabat', price: '25 USD', duration: '3 hours', local: 'Kasbah Guides', sustainability: 'Walking-first route' },
-    { id: 6, title: 'Desert Camp Preview', city: 'Marrakech', price: '120 USD', duration: '1 day', local: 'Atlas Nomad Camp', sustainability: 'Low-waste camp policy' }
+    { city: 'Casablanca', stadium: 'Grand Stadium Hassan II - Benslimane-Casablanca', fanZone: 'Corniche Fan Walk', access: 'Regional arrivals, city shuttles and guided match-day routes', tip: 'Project visual: construction is ongoing, with 115,000 gross seats planned for 2030.', photo: 'https://niya.maroc.ma/wp-content/uploads/2024/08/Grand-Stade-HASSAN-II-de-Benslimane-Casablanca.jpg' },
+    { city: 'Rabat', stadium: 'Prince Moulay Abdellah Stadium', fanZone: 'Bouregreg Fan Zone', access: 'Agdal, Hay Riad and Bouregreg arrival zones', tip: 'Stay near Agdal or Hay Riad for easy access.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Moulay%20Abdellah%20Stadium.jpg?width=1200' },
+    { city: 'Marrakech', stadium: 'Marrakech Stadium', fanZone: 'Menara Fan Garden', access: 'Hotel pickup points and match-day city routes', tip: 'Plan evening medina visits after match traffic calms.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade%20de%20marrakech.jpg?width=1200' },
+    { city: 'Tangier', stadium: 'The Grand Stadium of Tangier', fanZone: 'Marina Fan Zone', access: 'Marina arrival zone and stadium shuttle corridors', tip: 'World Cup 2030 upgrade target: 75,600 gross seats and 71,000 net seats.', photo: 'https://niya.maroc.ma/wp-content/uploads/2023/12/Grand-Stade-de-Tanger.jpg' },
+    { city: 'Agadir', stadium: 'Adrar Stadium', fanZone: 'Beach Fan Village', access: 'Beach village pickup points and stadium access routes', tip: 'Combine match day with beach and souk visits.', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Stade-Adrar2019.png?width=1200' },
+    { city: 'Fes', stadium: 'The Stadium of Fez', fanZone: 'Medina Culture Fan Hub', access: 'Medina culture hub and stadium access routes', tip: 'World Cup 2030 upgrade target: 55,800 gross seats and 49,200 net seats.', photo: 'https://niya.maroc.ma/wp-content/uploads/2024/08/Stade-de-Fes-1.jpg' }
 ];
 
 const emergencyContacts = [
     { type: 'Police', number: '19', note: 'National emergency police number' },
     { type: 'Ambulance / Fire', number: '15', note: 'Medical and fire emergency' },
     { type: 'Tourist Police', number: '05 24 38 46 01', note: 'Useful in major tourist cities' },
-    { type: 'Lost Documents', number: 'Nearest embassy or consulate', note: 'Keep passport copy in your digital passport' }
-];
-
-const recognitionSamples = [
-    { keyword: 'mosque', result: 'This looks like a Moroccan mosque. Check tilework, minaret shape, calligraphy and nearby prayer schedules.' },
-    { keyword: 'tagine', result: 'This may be a tagine, a slow-cooked Moroccan dish served in a clay cone-shaped pot.' },
-    { keyword: 'zellige', result: 'This resembles zellige, Moroccan geometric mosaic craft used in palaces, fountains and riads.' },
-    { keyword: 'default', result: 'MorEcho AI would analyze the image, identify the place or object, then explain its history, culture and nearby experiences.' }
+    { type: 'Lost Documents', number: 'Nearest embassy or consulate', note: 'Keep a secure copy of your passport documents' }
 ];

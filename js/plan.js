@@ -55,9 +55,6 @@ function generatePlan() {
             <div class="plan-item">
                 <strong>Time Needed:</strong> ${city.monuments[0].time}
             </div>
-            <div class="plan-item">
-                <strong>Transport:</strong> ${city.transportation}
-            </div>
         </div>`;
 
         // Afternoon Section
@@ -134,21 +131,16 @@ function generatePlan() {
         });
         html += `</div>`;
 
-        // Transportation Section
         html += `<div class="plan-section">
-            <h3>Transportation Tips</h3>
-            <div class="plan-item">
-                <strong>Available Options:</strong> ${city.transportation}
-            </div>
+            <h3>Visit Tips</h3>
             <div class="plan-item">
                 <strong>Best Time to Visit:</strong> ${city.bestTime}
             </div>
             <div class="plan-item">
                 <strong>Pro Tips:</strong> 
-                <br/>- Negotiate taxi fares before boarding
-                <br/>- Use ride-sharing apps when available
                 <br/>- Consider hiring a local guide
                 <br/>- Book accommodations in advance
+                <br/>- Keep key stops close together for an easier day
             </div>
         </div>`;
 
@@ -163,7 +155,6 @@ function generatePlan() {
                 <br/>- Accommodation: ${budget === 'budget' ? '\$30-50' : budget === 'standard' ? '\$50-150' : '\$150+'}/night
                 <br/>- Meals: ${budget === 'budget' ? '\$15-25' : budget === 'standard' ? '\$25-50' : '\$50+'}/day
                 <br/>- Activities: ${budget === 'budget' ? '\$10-20' : budget === 'standard' ? '\$20-50' : '\$50+'}/day
-                <br/>- Transportation: ${budget === 'budget' ? '\$10-15' : budget === 'standard' ? '\$15-30' : '\$30+'}/day
             </div>
         </div>`;
 

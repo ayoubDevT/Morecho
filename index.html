@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MorEcho - AI Tourism Morocco</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -19,7 +20,7 @@
     <div class="auth-container" id="authContainer">
         <div class="auth-box">
             <div class="brand-lockup auth-brand">
-                <img src="assets/logo.svg" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="assets/logo 4.png" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <strong style="display:none;">MorEcho</strong>
             </div>
             <h1 id="authTitle">Login</h1>
@@ -68,7 +69,7 @@
         <header class="header">
             <div class="header-left">
                 <div class="brand-lockup header-brand">
-                    <img src="assets/logo.svg" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <img src="assets/logo 4.png" alt="MorEcho logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <strong style="display:none;">MorEcho</strong>
                 </div>
                 <h1>AI Tourism Morocco</h1>
@@ -93,19 +94,14 @@
                     </div>
                 </li>
                 <li>
-                    <div class="menu-item" onclick="toggleSubmenu('moreMenu')"><span data-icon="passport"></span>More</div>
+                    <div class="menu-item" onclick="toggleSubmenu('moreMenu')"><span data-icon="book"></span>More</div>
                     <div class="submenu" id="moreMenu">
                         <a onclick="showSection('worldCup')">World Cup</a>
-                        <a onclick="showSection('passport')">Passport</a>
-                        <a onclick="showSection('marketplace')">Marketplace</a>
-                        <a onclick="showSection('transport')">Transport</a>
                         <a onclick="showSection('emergency')">Emergency</a>
-                        <a onclick="showSection('recognition')">AI Vision</a>
                         <a onclick="showSection('community')">Community</a>
                         <a onclick="showSection('blog')">Journal</a>
                         <a onclick="showSection('map')">Map</a>
                         <a onclick="showSection('accessibility')">Accessibility</a>
-                        <a onclick="showSection('analytics')">Analytics</a>
                         <a onclick="showSection('profile')">Profile</a>
                     </div>
                 </li>
@@ -118,7 +114,7 @@
                     <div>
                         <span class="eyebrow">FIFA World Cup 2030 ready</span>
                         <h2>MorEcho turns Morocco into a personal AI travel story.</h2>
-                        <p>Plan smarter trips, discover culture, book local experiences, travel safely, and collect memories in your digital passport.</p>
+                        <p>Plan smarter trips, discover culture, travel safely, and collect memorable Morocco stories.</p>
                     </div>
                     <button class="btn btn-primary" onclick="showSection('aiCompanion')">Ask MorEcho AI</button>
                 </div>
@@ -127,11 +123,11 @@
 
                 <div class="dashboard-grid">
                     <div class="card" onclick="showSection('aiCompanion')"><span data-icon="bot"></span><h3>AI Travel Companion</h3><p>Multilingual guidance for itineraries, culture, safety and local tips.</p></div>
-                    <div class="card" onclick="showSection('map')"><span data-icon="map"></span><h3>Interactive Map</h3><p>Explore monuments, beaches, hospitals, transport and fan zones.</p></div>
+                    <div class="card" onclick="showSection('askPlan')"><span data-icon="plan"></span><h3>Smart Planner</h3><p>Build city day plans with hotels, restaurants, monuments and budgets.</p></div>
+                    <div class="card" onclick="showSection('map')"><span data-icon="map"></span><h3>Interactive Map</h3><p>Explore monuments, beaches, hospitals, routes and fan zones.</p></div>
                     <div class="card" onclick="showSection('worldCup')"><span data-icon="trophy"></span><h3>World Cup Mode</h3><p>Match cities, fan zones, stadium tips and match-day mobility.</p></div>
-                    <div class="card" onclick="showSection('passport')"><span data-icon="passport"></span><h3>Digital Passport</h3><p>Unlock stamps, XP, badges and sustainability progress.</p></div>
-                    <div class="card" onclick="showSection('marketplace')"><span data-icon="market"></span><h3>Local Marketplace</h3><p>Book cooking classes, workshops, tours and surf lessons.</p></div>
                     <div class="card" onclick="showSection('emergency')"><span data-icon="shield"></span><h3>Emergency Help</h3><p>Quick police, ambulance, tourist support and lost document guidance.</p></div>
+                    <div class="card" onclick="showSection('community')"><span data-icon="users"></span><h3>Community</h3><p>Share travel posts, ask locals and follow recent Morocco discussions.</p></div>
                 </div>
 
                 <h3 class="section-title">Personalized recommendations</h3>
@@ -140,28 +136,9 @@
 
             <section class="content-section" id="aiCompanion">
                 <h2>AI Travel Companion</h2>
-                <p class="muted">Prototype assistant for English, French, Arabic, Spanish and Portuguese responses.</p>
-                <div class="app-grid two-col">
-                    <div class="form-container">
-                        <div class="form-group">
-                            <label for="aiLanguage">Language</label>
-                            <select id="aiLanguage">
-                                <option value="en">English</option>
-                                <option value="fr">Francais</option>
-                                <option value="ar">Arabic</option>
-                                <option value="es">Espanol</option>
-                                <option value="pt">Portugues</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="aiQuestion">Ask anything</label>
-                            <textarea id="aiQuestion" placeholder="Example: I have one day in Marrakech and love history"></textarea>
-                        </div>
-                        <button class="btn btn-primary" onclick="askAICompanion()">Generate answer</button>
-                    </div>
-                    <div class="chat-panel" id="aiConversation">
-                        <div class="chat-bubble ai">Hello, I am MorEcho AI. Ask about cities, budgets, restaurants, traditions, safety or World Cup travel.</div>
-                    </div>
+                <div class="form-container">
+                    <h3>Morocco 2030 Guide</h3>
+                    <p class="muted">Use the chat widget to plan your Morocco 2030 FIFA World Cup trip.</p>
                 </div>
             </section>
 
@@ -198,7 +175,7 @@
 
             <section class="content-section" id="askPlan">
                 <h2>Smart Itinerary Planner</h2>
-                <p class="muted">Generate a day plan with hotels, restaurants, transport and monuments.</p>
+                <p class="muted">Generate a day plan with hotels, restaurants, budgets and monuments.</p>
                 <div class="form-container">
                     <div class="form-group">
                         <label>Select City</label>
@@ -231,68 +208,14 @@
 
             <section class="content-section" id="worldCup">
                 <h2>FIFA World Cup 2030 Mode</h2>
-                <p class="muted">Dedicated match-city guidance for stadiums, fan zones, transport and safety.</p>
+                <p class="muted">Dedicated match-city guidance for stadiums, fan zones, access and safety.</p>
                 <div class="feature-grid" id="worldCupCards"></div>
-            </section>
-
-            <section class="content-section" id="passport">
-                <h2>Moroccan Digital Passport</h2>
-                <p class="muted">Unlock city stamps, XP, achievements and sustainable traveler progress.</p>
-                <div id="passportPanel"></div>
-            </section>
-
-            <section class="content-section" id="marketplace">
-                <h2>Local Experiences Marketplace</h2>
-                <p class="muted">Book activities that support Moroccan guides, artisans and small businesses.</p>
-                <div class="feature-grid" id="marketplaceGrid"></div>
-            </section>
-
-            <section class="content-section" id="transport">
-                <h2>Transportation Assistant</h2>
-                <p class="muted">Compare route options by time, cost and sustainability.</p>
-                <div class="app-grid two-col">
-                    <div class="form-container">
-                        <div class="form-group">
-                            <label for="transportCity">City</label>
-                            <select id="transportCity">
-                                <option>Marrakech</option><option>Casablanca</option><option>Rabat</option><option>Fes</option><option>Tangier</option><option>Agadir</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="transportMode">Transport mode</label>
-                            <select id="transportMode">
-                                <option value="walking">Walking</option>
-                                <option value="tram">Tram</option>
-                                <option value="bus">Bus</option>
-                                <option value="train">Train</option>
-                                <option value="taxi">Taxi</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-primary" onclick="calculateTransport()">Calculate route</button>
-                    </div>
-                    <div id="transportResult"></div>
-                </div>
             </section>
 
             <section class="content-section" id="emergency">
                 <h2>Emergency Assistance</h2>
                 <p class="muted">Quick access to essential contacts and travel safety guidance.</p>
                 <div class="emergency-grid" id="emergencyList"></div>
-            </section>
-
-            <section class="content-section" id="recognition">
-                <h2>AI Image Recognition</h2>
-                <p class="muted">Prototype: describe or name what appears in a photo and MorEcho explains it.</p>
-                <div class="app-grid two-col">
-                    <div class="form-container">
-                        <div class="form-group">
-                            <label for="imageHint">Image hint</label>
-                            <input id="imageHint" type="text" placeholder="mosque, tagine, zellige, monument">
-                        </div>
-                        <button class="btn btn-primary" onclick="analyzeImageHint()">Analyze</button>
-                    </div>
-                    <div id="recognitionResult"></div>
-                </div>
             </section>
 
             <section class="content-section" id="accessibility">
@@ -392,18 +315,6 @@
                 <div id="blogList" class="mt-20"></div>
             </section>
 
-            <section class="content-section" id="analytics">
-                <h2>Tourism Analytics Dashboard</h2>
-                <p class="muted">Prototype view for authorities: trends, impact and sustainability indicators.</p>
-                <div class="metric-grid" id="analyticsGrid"></div>
-                <div class="analytics-panel">
-                    <div style="height:45%; width:72%;"></div>
-                    <div style="height:70%; width:48%;"></div>
-                    <div style="height:35%; width:62%;"></div>
-                    <div style="height:82%; width:54%;"></div>
-                </div>
-            </section>
-
             <section class="content-section" id="profile">
                 <div class="profile-container">
                     <div class="profile-header">
@@ -439,5 +350,28 @@
     <script src="js/profile.js"></script>
     <script src="js/features.js"></script>
     <script src="js/app.js"></script>
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'https://ayouby.app.n8n.cloud/webhook/24910f31-ab95-44a9-b510-1204b73a4c3f/chat',
+            mode: 'window',
+            showWelcomeScreen: false,
+            initialMessages: [
+                'Hi there! 👋 My name is Morecho.',
+                'I am your Morocco 2030 FIFA World Cup travel guide.',
+                'Which host city would you like to explore today? 🇲🇦'
+            ],
+            i18n: {
+                en: {
+                    title: 'Morocco 2030 Guide 🇲🇦',
+                    subtitle: 'Your FIFA World Cup travel companion',
+                    inputPlaceholder: 'Ask about Marrakech, Rabat, Fes, Casablanca, Tangier or Agadir...',
+                    getStarted: 'Start Planning',
+                    closeButtonTooltip: 'Close chat',
+                }
+            }
+        });
+    </script>
 </body>
 </html>

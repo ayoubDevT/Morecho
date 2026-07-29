@@ -62,26 +62,11 @@ function showSection(sectionId) {
         case 'worldCup':
             renderWorldCupMode();
             break;
-        case 'passport':
-            renderPassport();
-            break;
-        case 'marketplace':
-            renderMarketplace();
-            break;
-        case 'transport':
-            renderTransportAssistant();
-            break;
         case 'emergency':
             renderEmergency();
             break;
         case 'accessibility':
             renderAccessibilityPanel();
-            break;
-        case 'recognition':
-            renderRecognitionPanel();
-            break;
-        case 'analytics':
-            renderAnalyticsDashboard();
             break;
     }
 }

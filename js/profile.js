@@ -266,7 +266,6 @@ function awardChallenge(challenge, proofImage, proofNote = '') {
     showAlert(`Challenge completed! +${points} points`, 'success');
     loadChallenges();
     loadProfile();
-    renderPassport();
     renderDashboardStats();
 }
 
