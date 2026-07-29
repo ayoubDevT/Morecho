@@ -1,5 +1,38 @@
 // ============ AUTHENTICATION FUNCTIONS ============
 
+let chatInitialized = false;
+
+function initializeChatWidget() {
+    if (chatInitialized) return;
+
+    import('https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js')
+        .then(module => {
+            module.createChat({
+                webhookUrl: 'https://ayouby.app.n8n.cloud/webhook/24910f31-ab95-44a9-b510-1204b73a4c3f/chat',
+                mode: 'window',
+                showWelcomeScreen: false,
+                initialMessages: [
+                    'Hi there! 👋 My name is Morecho.',
+                    'I am your Morocco 2030 FIFA World Cup travel guide.',
+                    'Which host city would you like to explore today? 🇲🇦'
+                ],
+                i18n: {
+                    en: {
+                        title: 'Morocco 2030 Guide 🇲🇦',
+                        subtitle: 'Your FIFA World Cup travel companion',
+                        inputPlaceholder: 'Ask about Marrakech, Rabat, Fes, Casablanca, Tangier or Agadir...',
+                        getStarted: 'Start Planning',
+                        closeButtonTooltip: 'Close chat',
+                    }
+                }
+            });
+            chatInitialized = true;
+        })
+        .catch(error => {
+            console.error('Failed to initialize chat widget:', error);
+        });
+}
+
 function toggleAuthForm() {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -29,42 +62,6 @@ function handleLogin() {
     } else {
         showAlert('Invalid email or password', 'error');
     }
-}
-
-function getDefaultJournalPostsForUser(user) {
-    const now = new Date().toISOString();
-    return [
-        {
-            id: Date.now() + 1,
-            userId: user.id,
-            author: user.name,
-            avatar: user.avatar,
-            title: 'Bienvenue dans ton journal de voyage',
-            content: 'Commence ici ton carnet de bord avec tes premières impressions du Maroc. Note tes découvertes, tes adresses préférées, et ce que tu veux absolument visiter ensuite.',
-            city: 'Marrakech',
-            imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jamaa%20El%20Fna%20%28Marrakesch%2C%20Marokko%29%2001.jpg?width=1200',
-            type: 'blog',
-            likes: 0,
-            views: 0,
-            comments: [],
-            createdAt: now
-        },
-        {
-            id: Date.now() + 2,
-            userId: user.id,
-            author: user.name,
-            avatar: user.avatar,
-            title: 'Mes astuces locales et bons plans',
-            content: 'Rédige une liste de bons plans locaux : cafés à ne pas manquer, transports faciles et conseils de sécurité pendant ton voyage.',
-            city: 'Fès',
-            imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bab%20Bou%20Jeloud%20Frame%20Minaret%20Fes%20Nov25%20A7CR%2009127-8%20HDR3.jpg?width=1200',
-            type: 'blog',
-            likes: 0,
-            views: 0,
-            comments: [],
-            createdAt: now
-        },
-    ];
 }
 
 function handleRegister() {
@@ -97,7 +94,6 @@ function handleRegister() {
     };
 
     state.users.push(newUser);
-    state.blogPosts = state.blogPosts.concat(getDefaultJournalPostsForUser(newUser));
     state.save();
 
     showAlert('Registration successful! Please login.', 'success');
@@ -130,6 +126,7 @@ function loadMainApp() {
     if (typeof initializeAdvancedFeatures === 'function') {
         initializeAdvancedFeatures();
     }
+    initializeChatWidget();
 }
 
 function updateUserDisplay() {
