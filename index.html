@@ -299,6 +299,18 @@
             <section class="content-section" id="blog">
                 <h2>Travel Journal</h2>
                 <p class="muted">Write stories, reviews and travel memories.</p>
+                <div class="form-group">
+                    <label for="blogFilterCity">Filter by city</label>
+                    <select id="blogFilterCity" onchange="loadBlogPosts()">
+                        <option value="">All cities</option>
+                        <option value="Marrakech">Marrakech</option>
+                        <option value="Tangier">Tangier</option>
+                        <option value="Fes">Fes</option>
+                        <option value="Agadir">Agadir</option>
+                        <option value="Rabat">Rabat</option>
+                        <option value="Casablanca">Casablanca</option>
+                    </select>
+                </div>
                 <div class="form-container">
                     <h3>Write a Journal Post</h3>
                     <div class="form-group"><label for="blogTitle">Title</label><input type="text" id="blogTitle" placeholder="Enter post title"></div>

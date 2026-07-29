@@ -318,10 +318,20 @@ function loadBlogPosts() {
         return;
     }
 
+    const selectedCity = document.getElementById('blogFilterCity')?.value || '';
     const sortedBlogs = [...state.blogPosts]
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    blogList.innerHTML = sortedBlogs.map(post => {
+    const filteredBlogs = selectedCity
+        ? sortedBlogs.filter(post => post.city === selectedCity)
+        : sortedBlogs;
+
+    if (filteredBlogs.length === 0) {
+        blogList.innerHTML = `<p style="color: var(--text-light); text-align: center;">No journal posts found for ${selectedCity ? escapeHTML(selectedCity) : 'any city'}.</p>`;
+        return;
+    }
+
+    blogList.innerHTML = filteredBlogs.map(post => {
         const commentsHtml = (post.comments || []).map(comment => `
             <div class="comment-item">
                 <strong>${escapeHTML(comment.author)}</strong>
