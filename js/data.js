@@ -6,7 +6,9 @@ class AppState {
         this.posts = JSON.parse(localStorage.getItem('posts')) || [];
         this.challenges = JSON.parse(localStorage.getItem('challenges')) || [];
         this.questions = JSON.parse(localStorage.getItem('questions')) || [];
-        this.blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        this.blogPosts = (JSON.parse(localStorage.getItem('blogPosts')) || []).filter(post => {
+            return String(post.title || '').trim().toLowerCase() !== 'mon itinéraire de la semaine';
+        });
         this.bookings = JSON.parse(localStorage.getItem('bookings')) || [];
         this.passport = JSON.parse(localStorage.getItem('passport')) || {
             stamps: [],
