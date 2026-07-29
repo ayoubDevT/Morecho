@@ -64,21 +64,6 @@ function getDefaultJournalPostsForUser(user) {
             comments: [],
             createdAt: now
         },
-        {
-            id: Date.now() + 3,
-            userId: user.id,
-            author: user.name,
-            avatar: user.avatar,
-            title: 'Mon itinéraire de la semaine',
-            content: 'Prépare un plan pour les prochains jours : les villes à visiter, les monuments à voir et les restaurants à tester.',
-            city: 'Casablanca',
-            imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hassan_II_Mosque%2C_Casablanca.jpg?width=1200',
-            type: 'blog',
-            likes: 0,
-            views: 0,
-            comments: [],
-            createdAt: now
-        }
     ];
 }
 
