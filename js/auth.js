@@ -31,6 +31,57 @@ function handleLogin() {
     }
 }
 
+function getDefaultJournalPostsForUser(user) {
+    const now = new Date().toISOString();
+    return [
+        {
+            id: Date.now() + 1,
+            userId: user.id,
+            author: user.name,
+            avatar: user.avatar,
+            title: 'Bienvenue dans ton journal de voyage',
+            content: 'Commence ici ton carnet de bord avec tes premières impressions du Maroc. Note tes découvertes, tes adresses préférées, et ce que tu veux absolument visiter ensuite.',
+            city: 'Marrakech',
+            imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jamaa%20El%20Fna%20%28Marrakesch%2C%20Marokko%29%2001.jpg?width=1200',
+            type: 'blog',
+            likes: 0,
+            views: 0,
+            comments: [],
+            createdAt: now
+        },
+        {
+            id: Date.now() + 2,
+            userId: user.id,
+            author: user.name,
+            avatar: user.avatar,
+            title: 'Mes astuces locales et bons plans',
+            content: 'Rédige une liste de bons plans locaux : cafés à ne pas manquer, transports faciles et conseils de sécurité pendant ton voyage.',
+            city: 'Fès',
+            imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bab%20Bou%20Jeloud%20Frame%20Minaret%20Fes%20Nov25%20A7CR%2009127-8%20HDR3.jpg?width=1200',
+            type: 'blog',
+            likes: 0,
+            views: 0,
+            comments: [],
+            createdAt: now
+        },
+        {
+            id: Date.now() + 3,
+            userId: user.id,
+            author: user.name,
+            avatar: user.avatar,
+            title: 'Mon itinéraire de la semaine',
+            content: 'Prépare un plan pour les prochains jours : les villes à visiter, les monuments à voir et les restaurants à tester.',
+            city: 'Casablanca',
+            imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hassan_II_Mosque%2C_Casablanca.jpg?width=1200',
+            type: 'blog',
+            likes: 0,
+            views: 0,
+            comments: [],
+            createdAt: now
+        }
+    ];
+}
+
 function handleRegister() {
     const name = document.getElementById('registerName').value.trim();
     const email = document.getElementById('registerEmail').value.trim();
@@ -61,6 +112,7 @@ function handleRegister() {
     };
 
     state.users.push(newUser);
+    state.blogPosts = state.blogPosts.concat(getDefaultJournalPostsForUser(newUser));
     state.save();
 
     showAlert('Registration successful! Please login.', 'success');
