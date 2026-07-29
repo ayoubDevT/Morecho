@@ -1,6 +1,10 @@
 // ============ MOR ECHO ADVANCED FEATURES ============
 
 function icon(name) {
+    if (name === 'map') {
+        return '<img class="icon map-icon" src="assets/Map.png" alt="">';
+    }
+
     const path = iconPaths[name] || iconPaths.home;
     return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"></path></svg>`;
 }

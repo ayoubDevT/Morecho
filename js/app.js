@@ -10,6 +10,7 @@ function initializeApp() {
     if (state.currentUser) {
         loadMainApp();
     } else {
+        document.body.classList.add('auth-screen');
         document.getElementById('authContainer').classList.remove('hidden');
     }
 

@@ -114,11 +114,13 @@ function handleLogout() {
         document.getElementById('loginEmail').value = '';
         document.getElementById('loginPassword').value = '';
         document.getElementById('sidebar').classList.remove('active');
+        document.body.classList.add('auth-screen');
         showAlert('Logged out successfully', 'info');
     }
 }
 
 function loadMainApp() {
+    document.body.classList.remove('auth-screen');
     document.getElementById('authContainer').classList.add('hidden');
     document.getElementById('mainContainer').classList.add('active');
     updateUserDisplay();
