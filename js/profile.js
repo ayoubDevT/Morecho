@@ -76,12 +76,10 @@ function loadChallenges() {
         return;
     }
 
-    const userChallenges = state.challenges.filter(c => c.userId === state.currentUser.id);
+    const userChallenges = state.challenges.filter(c => c.userId === state.currentUser.id && isGeneratedPlanChallenge(c));
     const challengesList = document.getElementById('challengesList');
     const completedCount = userChallenges.filter(c => c.status === 'completed').length;
     const activeCount = userChallenges.filter(c => c.status !== 'completed').length;
-    const activeTemplateIds = userChallenges.filter(c => c.status !== 'completed').map(c => c.templateId).filter(Boolean);
-    const availableChallenges = challengeTemplates.filter(template => !activeTemplateIds.includes(template.id));
 
     challengesList.innerHTML = `
         <div class="game-dashboard">
@@ -102,20 +100,19 @@ function loadChallenges() {
             </div>
         </div>
 
-        <h3 class="section-title">Choose a challenge</h3>
-        <div class="challenge-catalog">
-            ${availableChallenges.map(template => challengeTemplateCard(template)).join('') || '<p class="muted">All challenge types are already active. Complete one to unlock it again.</p>'}
-        </div>
-
-        <h3 class="section-title">Your active journey</h3>
+        <h3 class="section-title">Generated challenges</h3>
         ${userChallenges.length === 0 ? `
             <div class="challenge-card empty-game-state">
-                <h4>No active challenges yet</h4>
-                <p>Choose a challenge above or generate a smart plan to start collecting points.</p>
+                <h4>No generated challenges yet</h4>
+                <p>Generate a plan first. The challenge list will be created from your itinerary.</p>
                 <button class="btn btn-primary" onclick="showSection('askPlan')">Generate a plan challenge</button>
             </div>
         ` : userChallenges.map(challenge => challengeProgressCard(challenge)).join('')}
     `;
+}
+
+function isGeneratedPlanChallenge(challenge) {
+    return challenge.source === 'planner_generator' || challenge.type === 'generated_day_plan' || challenge.type === 'heritage_challenge' || challenge.type === 'day_plan';
 }
 
 function challengeTemplateCard(template) {
@@ -146,6 +143,9 @@ function challengeProgressCard(challenge) {
         const points = challenge.points || 80;
         const badge = challenge.badge || `${city} Explorer`;
         const proofInputId = `proof-${challenge.id}`;
+        const steps = Array.isArray(challenge.steps) && challenge.steps.length
+            ? `<ol class="challenge-steps">${challenge.steps.map(step => `<li>${escapeHTML(step)}</li>`).join('')}</ol>`
+            : '';
         const actionButton = challenge.status === 'completed'
             ? `<div class="proof-preview">${challenge.proofImage ? `<img src="${challenge.proofImage}" alt="Challenge proof">` : ''}<p>Reward claimed: ${points} points</p></div>`
             : `
@@ -170,6 +170,7 @@ function challengeProgressCard(challenge) {
                     <span class="challenge-status ${statusClass}">${statusText}</span>
                 </div>
                 <p>${escapeHTML(challenge.evidence || 'Take a photo that proves you completed this travel plan.')}</p>
+                ${steps}
                 ${actionButton}
             </div>
         `;

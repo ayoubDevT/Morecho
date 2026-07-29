@@ -96,14 +96,14 @@ async function generatePlan() {
         planResult.innerHTML = html;
         planResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        savePlanToHistory({
+        const historyPlan = savePlanToHistory({
             city: data.city || selectedCity,
             budget,
             travelStyle,
             title: `${data.city || selectedCity} Day Plan`,
             html
         });
-        addPlanChallenge(data.city || selectedCity);
+        addGeneratedPlanChallenges(data, historyPlan);
         showAlert(`Plan for ${data.city || selectedCity} generated and saved!`, 'success');
     } catch (error) {
         planResult.innerHTML = `
@@ -335,6 +335,7 @@ function savePlanToHistory(plan) {
 
     state.plans.unshift(historyPlan);
     state.save();
+    return historyPlan;
 }
 
 function renderPlanHistory() {
@@ -391,7 +392,18 @@ function formatTravelStyle(style) {
     return style.charAt(0).toUpperCase() + style.slice(1);
 }
 
-function addPlanChallenge(city) {
+function addGeneratedPlanChallenges(planData, savedPlan) {
+    const city = savedPlan.city;
+    const heritageMonuments = (planData.monuments || []).filter(monument => monument.heritage_challenge?.eligible);
+    const generatedChallenges = heritageMonuments.length
+        ? heritageMonuments.map(monument => generatedHeritageChallenge(monument, savedPlan))
+        : [generatedDayPlanChallenge(savedPlan)];
+
+    generatedChallenges.forEach(challenge => state.challenges.push(challenge));
+    state.save();
+}
+
+function generatedHeritageChallenge(monument, savedPlan) {
     const pointsByCity = {
         Marrakech: 120,
         Casablanca: 120,
@@ -400,25 +412,62 @@ function addPlanChallenge(city) {
         Rabat: 110,
         Tangier: 100
     };
+    const city = savedPlan.city;
+    const instruction = monument.heritage_challenge?.instruction || `Take a photo at ${monument.name} and share what you learned.`;
 
-    const challenge = {
-        id: Date.now(),
+    return {
+        id: Date.now() + Math.floor(Math.random() * 1000),
         userId: state.currentUser.id,
         city: city,
-        title: `${city} Smart Plan Quest`,
-        category: 'Plan',
+        planId: savedPlan.id,
+        source: 'planner_generator',
+        title: `${monument.name} Heritage Challenge`,
+        category: 'Generated Plan',
         points: pointsByCity[city] || 100,
-        badge: `${city} Explorer`,
-        evidence: `Upload a photo from one stop in your ${city} itinerary to prove you followed the plan.`,
-        steps: ['Generate your plan', 'Visit one recommended stop', 'Upload photo proof'],
-        type: 'day_plan',
+        badge: `${city} Heritage Explorer`,
+        evidence: instruction,
+        steps: [
+            `Visit ${monument.name}`,
+            instruction,
+            'Upload photo proof'
+        ],
+        type: 'heritage_challenge',
         status: 'pending',
         createdAt: new Date().toISOString(),
         completedAt: null,
         proofImage: '',
         proofNote: ''
     };
+}
 
-    state.challenges.push(challenge);
-    state.save();
+function generatedDayPlanChallenge(savedPlan) {
+    const pointsByCity = {
+        Marrakech: 120,
+        Casablanca: 120,
+        Fes: 130,
+        Agadir: 90,
+        Rabat: 110,
+        Tangier: 100
+    };
+    const city = savedPlan.city;
+
+    return {
+        id: Date.now(),
+        userId: state.currentUser.id,
+        city,
+        planId: savedPlan.id,
+        source: 'planner_generator',
+        title: `${city} Generated Plan Quest`,
+        category: 'Generated Plan',
+        points: pointsByCity[city] || 100,
+        badge: `${city} Explorer`,
+        evidence: `Upload a photo from one stop in your generated ${city} itinerary.`,
+        steps: ['Generate your plan', 'Visit one recommended stop', 'Upload photo proof'],
+        type: 'generated_day_plan',
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+        completedAt: null,
+        proofImage: '',
+        proofNote: ''
+    };
 }
