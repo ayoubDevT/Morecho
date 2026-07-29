@@ -78,6 +78,14 @@ a,
     display: none !important;
 }
 
+/* Ensure chat toggle is elevated above mobile bottom controls */
+.n8n-chat,
+.n8n-chat__toggle,
+.n8n-chat__toggle-button {
+    padding-bottom: 40px !important;
+    margin-bottom: 18px !important;
+}
+
 .auth-container {
     min-height: 100vh;
     display: flex;
